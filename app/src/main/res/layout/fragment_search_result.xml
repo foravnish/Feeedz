@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+    <RelativeLayout
+        android:id="@+id/toolbarmain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_bg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:id="@+id/tv_search_result_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_18sp"
+            app:customFont="@string/Boldfont" />
+
+        <ImageView
+            android:id="@+id/btn_setting"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarmain"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/list"
+            android:name="com.socialinfotech.feeedj.SearchActivity.SearchResultActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_progress="@layout/view_progrss"
+            tools:context=".SearchActivity.SearchResultActivity"
+            tools:listitem="@layout/raw_search_bottom_item" />
+    </LinearLayout>
+<ImageView
+    android:id="@+id/img_no_result"
+    android:layout_width="@dimen/margin_150dp"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:src="@drawable/no_result"
+    android:visibility="gone"/>
+</RelativeLayout>

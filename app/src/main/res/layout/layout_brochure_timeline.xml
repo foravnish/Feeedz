@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+    <RelativeLayout
+        android:id="@+id/rl_brochure_timeline"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:animateLayoutChanges="true"
+        android:background="#fbfbfc"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/rv_brochure_timeline"
+            android:name="com.socialinfotech.feeedj.SearchActivity.SearchFragmentFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="56dp"
+            android:visibility="visible"
+            android:animateLayoutChanges="true"
+            android:layout_toLeftOf="@+id/v_raw_brochure_separator"
+            android:orientation="horizontal" />
+
+        <View
+            android:id="@+id/v_raw_brochure_separator"
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:background="@color/grey" />
+
+        <ImageView
+            android:id="@+id/iv_brochure_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/ic_brochure_title" />
+
+        <View
+            android:id="@+id/v_brochure_bottom_separator"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="#cac7ce" />
+    </RelativeLayout>
+</LinearLayout>

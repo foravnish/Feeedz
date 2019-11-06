@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:minWidth="50dp"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_8dp"
+    android:rotationY="180"
+    android:background="@color/timeline_search_trending_keyword_background">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_timeline_search_section_arrow"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:gravity="center">
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:id="@+id/tv_timeline_search_section_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tag"
+            android:textColor="@color/white"
+            android:textSize="13dp"
+            app:customFont="@string/Boldfont" />
+    </LinearLayout>
+</LinearLayout>

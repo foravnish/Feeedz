@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="Skip">خلها بعدين</string>
+    <string name="Register">التسجيل</string>
+    <string name="No_internet_conection">شكله الإنترنت عندك فيه مشكلة</string>
+    <string name="PDFVieWActivityAlertDialogMessage" translatable="false">شويات ويتحمل العرض..</string>
+    <string name="list_footer">خلاص مافي عروض زيادة</string>
+</resources>

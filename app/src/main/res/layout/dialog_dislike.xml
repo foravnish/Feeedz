@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="270dp"
+    android:layout_height="370dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ApplicationActivities.LauncherActivity">
+
+
+   <ImageView
+       android:layout_width="wrap_content"
+       android:src="@drawable/disikevc"
+       android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/ll"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:weightSum="3"
+        android:layout_above="@+id/ed_description"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_40dp"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/margin_40dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/ed_description"
+        android:minLines="4"
+        android:padding="@dimen/margin_10dp"
+        android:hint="عندك تعليق؟ (اختياري)"
+        android:gravity="right"
+        android:maxLines="4"
+        android:background="@drawable/et_background_white_dislike_dialog"
+        android:textSize="@dimen/txt_16sp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content" />
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        app:customFont="@string/Boldfont"
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:layout_height="50dp" />
+</RelativeLayout>

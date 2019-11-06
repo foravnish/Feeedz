@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/list_bg"
+    tools:context="com.socialinfotech.feeedj.SearchActivity.SearchActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbarmain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_bg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="بحث"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_18sp"
+            app:customFont="@string/Boldfont" />
+
+        <ImageView
+            android:id="@+id/btn_setting"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_below="@+id/toolbarmain"
+        android:background="#70296b"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_search"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_margin="@dimen/margin_10dp"-->
+            <!--android:background="@drawable/et_background_search"-->
+            <!--android:drawableLeft="@drawable/search"-->
+            <!--android:gravity="center"-->
+            <!--android:hint="@string/serch_hint"-->
+            <!--android:imeOptions="actionSearch"-->
+            <!--android:padding="@dimen/margin_5dp"-->
+            <!--android:singleLine="true" />-->
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nscroll"
+        android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true"
+                android:visibility="gone">
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/txt_lable_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:padding="@dimen/margin_20dp"
+                    android:text="@string/serach_first"
+                    android:textColor="@color/black"
+                    app:customFont="@string/Boldfont" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dashed_line" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_compnay"
+                    android:name="com.socialinfotech.feeedj.SearchActivity.SearchFragmentFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_progress="@layout/view_progrss"
+                    tools:listitem="@layout/raw_timeline_brochure_items" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll"
+                android:orientation="vertical">
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:padding="@dimen/margin_20dp"
+                    android:text="@string/title_hash_tags_grid"
+                    android:textColor="@color/black"
+                    app:customFont="@string/Boldfont" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dashed_line" />
+                <GridView
+                    android:id="@+id/layout_search_hash_tags_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="330dp"
+                    android:background="@drawable/custom_background_grid_hash_tags"
+                    android:columnWidth="100dp"
+                    android:fadingEdgeLength="20dp"
+                    android:horizontalSpacing="1.5dp"
+                    android:numColumns="2"
+                    android:paddingTop="@dimen/margin_10dp"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1.5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_list_search_featured"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_grid"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:padding="@dimen/margin_20dp"
+                    android:text="@string/txt_list_search_featured_offers"
+                    android:textColor="@color/black"
+                    app:customFont="@string/Boldfont" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:background="@drawable/dashed_line" />
+
+                <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:name="com.socialinfotech.feeedj.SearchActivity.SearchActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_progress="@layout/view_progrss"
+                tools:context=".SearchActivity.SearchActivity"
+                tools:listitem="@layout/raw_search_bottom_item" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

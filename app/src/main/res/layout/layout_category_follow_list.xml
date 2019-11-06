@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExploreActivities.CategoryFollowActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_bg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/back"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btn_back"
+            android:layout_height="match_parent" />
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            app:customFont="@string/Boldfont"
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/txt_18sp"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/btn_setting"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/list"
+        android:name="com.socialinfotech.feeedj.TimeLineActivities.CategoryFollowFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_below="@+id/toolbar"
+        app:layout_progress ="@layout/view_progrss"
+        tools:context=".ExploreActivities.CategoryFollowActivity"
+        tools:listitem="@layout/raw_cateogry_follow" />
+</RelativeLayout>

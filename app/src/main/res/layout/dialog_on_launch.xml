@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="270dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ApplicationActivities.LauncherActivity">
+
+
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        app:customFont="@string/Boldfont"
+        android:id="@+id/asa"
+        android:layout_width="match_parent"
+        android:background="@drawable/top_corner_round"
+        android:text="@string/Term_condition_title"
+        android:padding="@dimen/margin_15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/asa"
+        android:layout_height="@dimen/margin_220dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <!--android:text="@string/Tearm_text"-->
+            <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                app:customFont="@string/Boldfont"
+        android:layout_width="match_parent"
+        android:text="@string/Tearm_text"
+        android:background="@color/white"
+        android:id="@+id/sadads"
+        android:scrollbars = "vertical"
+        android:padding="@dimen/margin_10dp"
+        android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        app:customFont="@string/Boldfont"
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:background="@drawable/bottom_corner_round"
+        android:text="@string/teram_ok_button"
+        android:padding="@dimen/margin_15dp"
+        android:layout_below="@+id/scroll"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

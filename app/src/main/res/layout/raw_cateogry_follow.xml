@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/main_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:padding="@dimen/margin_8dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImage"
+            android:layout_width="@dimen/margin_50dp"
+            fresco:roundedCornerRadius="5dp"
+            android:layout_height="@dimen/margin_50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            fresco:placeholderImage="@drawable/placeholder" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sdvImage"
+            android:layout_alignLeft="@+id/sdvImage"
+            android:layout_marginLeft="-11dp"
+            android:layout_marginBottom="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_categories_number_of_offers_tag"/>
+
+            <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                app:customFont="@string/Boldfont"
+                android:text="عرض"
+                android:textColor="@color/category_follow_list_number_of_offers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:textSize="@dimen/txt_10sp"
+                android:id="@+id/txt_offers_number" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/sdvImage"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:gravity="left">
+
+            <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                app:customFont="@string/Boldfont"
+                android:id="@+id/txt_compnay_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12sp" />
+
+            <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                app:customFont="@string/GloberSemifont"
+                android:id="@+id/txt_compny_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chk_followed"
+            android:layout_width="wrap_content"
+            android:button="@drawable/selected_companies_chk_follow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@drawable/dashed_line"
+        android:layout_below="@+id/main_rl"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

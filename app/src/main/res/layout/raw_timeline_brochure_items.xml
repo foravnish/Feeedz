@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="84dp"
+    android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="4dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_add_iamge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="-14dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rl_brochure_badge"
+        app:actualImageScaleType="fitXY"
+        android:padding="3.5dp"
+        fresco:placeholderImage="@drawable/placeholder"
+        fresco:roundAsCircle="true"
+        android:background="@mipmap/bdr_brochure_pic_un_viewed"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_brochure_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/iv_brochure_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/bdg_brochure"/>
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:id="@+id/tv_brochure_badge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/iv_brochure_badge"
+            android:layout_alignTop="@id/iv_brochure_badge"
+            android:layout_alignRight="@id/iv_brochure_badge"
+            android:layout_alignBottom="@id/iv_brochure_badge"
+            android:gravity="center"
+            android:textColor="@color/timeline_search_section_title"
+            android:textSize="9dp"
+            android:layout_marginBottom="2dp"
+            app:customFont="@string/GEThameenDemibold" />
+    </RelativeLayout>
+
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:layout_below="@+id/sdv_add_iamge"
+        android:text="@string/provide_Text"
+        android:textColor="@color/timeline_brochure_title"
+        android:textSize="11dp"
+        app:customFont="@string/Boldfont" />
+</RelativeLayout>

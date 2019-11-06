@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/list"
+            android:name="com.socialinfotech.feeedj.SearchActivity.SearchResultActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_progress="@layout/view_progrss"
+            tools:context=".SearchActivity.SearchResultActivity"
+            tools:listitem="@layout/raw_search_bottom_item" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/img_no_result"
+        android:layout_width="@dimen/margin_150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/no_result"
+        android:visibility="gone"/>
+</RelativeLayout>

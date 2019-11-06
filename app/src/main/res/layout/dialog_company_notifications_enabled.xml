@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="164dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/bg_dialog_notifications_enabled"
+    android:padding="@dimen/margin_20dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ApplicationActivities.LauncherActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:src="@mipmap/ic_company_details_notifications_enabled_confirmation"
+        android:layout_height="wrap_content" />
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        app:customFont="@string/Boldfont"
+        android:layout_width="wrap_content"
+        android:text="@string/notifications_enabled"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:gravity="center_horizontal"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content" />
+</LinearLayout>

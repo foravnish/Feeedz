@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <string name="app_name" translatable="false">Feeedz</string>
+  <string name="login_hint" translatable="false">البريد الإلكتروني</string>
+  <string name="email_hint" translatable="false">البريد الإلكتروني</string>
+  <string name="usernmae_hint" translatable="false">اسم المستخدم</string>
+  <bool name="rtl_false" translatable="false">false</bool>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+  <string name="facebook_app" translatable="false">138379499919703</string>
+  <string name="provide_Text" translatable="false"></string>
+  <string name="Password" translatable="false">كلمة المرور</string>
+  <string name="UserID" translatable="false">اسم المستخدم</string>
+  <string name="Setting" translatable="false">الإعدادات</string>
+  <string name="SettingSaudi" translatable="false">صُنع في السعودية</string>
+  <string name="SettingVersion" translatable="false">v 1.24</string>
+  <string name="Changpassword" translatable="false">تغيير كلمة المرور</string>
+  <string name="Old_passwod" translatable="false">كلمة المرور الحالية</string>
+  <string name="new_password" translatable="false">كلمة المرور الجديدة</string>
+  <string name="cnf_pwd" translatable="false">إعادة إدخال كلمة المرور الجديدة</string>
+  <string name="Skip">خلها بعدين 😴</string>
+  <string name="Register">التسجيل 😍</string>
+  <string name="No_internet_conection">شكله الإنترنت عندك فيه مشكلة 😏</string>
+  <string name="Term_condition_title" translatable="false">الشروط و الأحكام</string>
+  <string name="Tearm_text">🚩إخلاء المسؤولية عن الضمانات🚩 \n\n الفريق العامل بموقع و تطبيق فيييدز يخلي مسؤوليته عن جميع الإقرارات والضمانات والتعهدات اللي تتعلق بالمعلومات والخدمات المتوفرة في الموقع والتطبيق✋😏.. \n\n عشان نخدمك بالشكل اللي يرضيكم و يرضينا 😍، اللي سويناه اننا جمعنا لك المعلومات والخدمات الموجودة ف فيييدز “زي ما هي” من مصادرها الأساسية عشان توفر وقتك، و جهدك، و فلووسك💸❌😌.. \n\n في نفس الوقت ، كل هذا بدون تقديم أية إقرارات أو ضمانات أو تعهدات من أي نوع بما فيها جميع الضمانات الضمنية وشروط قابلية التسويق والملائمة لغرض معين والملكية وعدم الانتهاك و الأشياء حقت القانونيين و الكلام اللي من ذا 😩.. \r\n\r\n 🚦 تنبيه 🚦: ترا بعض اوقات انتهاء العروض غير دقيقة لان بعض الشركات مو محددين فترة معينة لانهاء العرض المقدم منهم.. \n\n عشان كذا سيتم وضع وقت انتهاء \"*افتراضي*\" لأي عرض عرض مو محدد وقت انتهائه من الشركة صاحبة العرض. (7 أيام ابتداءاً من تاريخ نزول العرض في فيييدز) \n\n لذا وجب التنويه. \n\n \"خدمتك هي أساسنا و محل اهتمامنا الأول\" \n\n إذا كان عندك أي استفسار او اقتراح راسلنا على info@feeedz.com و ما يصير خاطرك الا طيّب 😘❤️️.. \r\n\r\n الشؤون القانونية</string>
+  <string name="teram_ok_button" translatable="false">تمام</string>
+  <string name="timeline_title" translatable="false">المعروضات</string>
+  <string name="saudi" translatable="false">اوكي</string>
+  <string name="list_footer">خلاص مافي عروض زيادة 👻</string>
+  <string name="Second_tab_title" translatable="false">ماي فيييدز</string>
+  <string name="Fourth_title" translatable="false">التصنيفات</string>
+  <string name="serch_hint" translatable="false">البحث عن شركات ، عروض  ...</string>
+  <string name="serach_first" translatable="false">تصنيفات البحث</string>
+  <string name="title_hash_tags_grid" translatable="false">ابحث عن العروض في:</string>
+  <string name="serazch_seoinc" translatable="false">عروض مختارة</string>
+  <string name="offer_detaike_title" translatable="false">تفاصيل العرض</string>
+  <string name="Detail_text_one" translatable="false">ضروري تعرف</string>
+  <string name="detail_text_two" translatable="false">وسائل الاتصال</string>
+  <string name="detail_text_three" translatable="false">شارك العرض</string>
+  <string name="login_email_hint" translatable="false">البريد الالكتروني (أو اسم المستخدم)</string>
+  <string name="password_login" translatable="false">كلمة المرور</string>
+  <string name="txt_list_search_featured_offers" translatable="false">عروض مختارة</string>
+  <string name="Tearm_text_one" translatable="false"></string>
+  <string name="Tearm_text_two" translatable="false"></string>
+
+  <string name="similar_companies" translatable="false">شركات مقترحة</string>
+
+  <string name="waring" translatable="false">وش رأيك تسجّل معنا في فيييدز؟</string>
+  <string name="warnig_two" translatable="false">عشان تقدر تستفيد من هذي الخاصية؟</string>
+  <string name="Boldfont" translatable="false">demibold.ttf</string>
+  <string name="GloberSemifont" translatable="false">Glober_SemiBold.ttf</string>
+  <string name="GloberRegular" translatable="false">Glober_Regular.ttf</string>
+  <string name="GEThameenDemibold" translatable="false">demibold.ttf</string>
+  <string name="GEThameenLight" translatable="false">GE_Thameen_Light.otf</string>
+  <string name="webviewtitle" translatable="false">العرض</string>
+  <string name="empty_offe_compnajy">لسّه قاعدين ندوّر لك عروض لهالشركة</string>
+  <string name="days" translatable="false">يوم</string>
+  <string name="hours" translatable="false">ساعة</string>
+  <string name="minutes" translatable="false">دقيقة</string>
+  <string name="seconds" translatable="false">ثانية</string>
+  <string name="pullRefresh" translatable="false">اسحب للأعلى لرؤية العروض الجديدة</string>
+  <string name="subscribers" translatable="false">مُتابع</string>
+  <string name="offers" translatable="false">عرض</string>
+  <string name="timelineSearchButtonShowcaseTitle" translatable="false"></string>
+  <string name="timelineSearchButtonShowcaseDescription" translatable="false">زر البحث يساعدكم في البحث عن أقوى وأحدث العروض الموجودة في فيييدز 😍🔥..\r\n\r\nكمان تقدرون تدورون عن جميع العروض في فئة معينة (طيران, الإلكترونيات, المطاعم, إلخ) بمجرد الضغط غلى زر الفئة..</string>
+  <string name="timelineHorizontalListHeading" translatable="false">النشرات</string>
+  <string name="PDFVieWActivityAlertDialogMessage" translatable="false">شويات ويتحمل العرض 😍..</string>
+  <string name="PDFVieWActivityAlertDialogCancelButton" translatable="false">إلغاء</string>
+  <string name="PDFVieWActivityDownloadingFailed" translatable="false">فشل تحميل العرض</string>
+  <string name="TimelineHorizontalViewMoreButtonText" translatable="false">عرض المزيد من الشركات</string>
+  <string name="TimelineSearchSectionTitleOne" translatable="false">أشهر كلمات البحث الحالية</string>
+  <string name="TimelineSearchSectionTitleTwo" translatable="false">اكتشف المزيد من العروض</string>
+  <string name="TimelineSearchSectionButtonOne" translatable="false">عروض جديدة</string>
+  <string name="TimelineSearchSectionButtonTwo" translatable="false">عروض مغرية</string>
+  <string name="TimelineSearchSectionButtonThree" translatable="false">عروض ستنتهي</string>
+  <string name="BrochureToolbarShare" translatable="false">مشاركة</string>
+  <string name="CategoriesTabOne" translatable="false">الشركات</string>
+  <string name="CategoriesTabTwo" translatable="false">العروض</string>
+
+  <string name="open_closed_until_when" translatable="false">حتى الساعة ٨ مساء</string>
+
+
+  <string name="subscribed_successfully" translatable="false">اتصل</string>
+
+
+  <string name="are_you_sure_you_want_to_un_subscribe_notifications" translatable="false">هل أنت متأكد أنك تبي تلغي التنبيهات؟</string>
+  <string name="yes_un_subscribe_notifications" translatable="false">اي، ألغ التنبيهات</string>
+
+
+  <string name="notifications_enabled" translatable="false">راح ننبهك لما تنزل عروض جديدة</string>
+
+
+
+
+  <string name="call" translatable="false">اتصل</string>
+  <string name="web" translatable="false">الموقع الإلكتروني</string>
+  <string name="email" translatable="false">البريد الإلكتروني</string>
+  <string name="location" translatable="false">الفروع</string>
+  <string name="cancel" translatable="false">إلغاء</string>
+
+
+  <string name="open_now" translatable="false">(مفتوح الآن)</string>
+  <string name="closed_now" translatable="false">(مغلق الآن)</string>
+  <string name="PhoneNumberIsNotAvailable" translatable="false">لا يوجد رقم اتصال لهذا الاعلان</string>
+  <string name="LocationIsNotAvailable" translatable="false">لا يوجد عنوان متوفر لهذا الاعلان</string>
+
+</resources>

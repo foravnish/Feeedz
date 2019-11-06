@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.socialinfotech.feeedj">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
+
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS"/>-->
+    <!--&lt;!&ndash;<uses-permission android:name="android.permission.GET_ACCOUNTS"/> try if it works without this&ndash;&gt;-->
+
+    <application
+        android:name=".ApplicationActivities.Home"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="@bool/rtl_false"
+        tools:replace="android:icon,android:theme,android:supportsRtl"
+        android:theme="@style/GlobalTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ApplicationActivities.SplashActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ApplicationActivities.LoginActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ApplicationActivities.RegistrationActivity"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ApplicationActivities.ForgotPasswordActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ApplicationActivities.MainActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme_Afterlogin" />
+        <activity
+            android:name=".ApplicationActivities.LauncherActivity"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ApplicationActivities.ImageViewActivity"
+            android:theme="@style/image_activity_theme" />
+        <activity
+            android:name=".TimeLineActivities.ViewCompanyDetailsActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme_Afterlogin" />
+        <!--<activity-->
+            <!--android:name=".TimeLineActivities.ViewOfferActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/AppTheme_Afterlogin" />-->
+        <activity
+            tools:replace="android:theme"
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app" />
+        <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="f8cd58cb5ac723a42447177f30ca306762bb66ed" />-->
+        <!--<meta-data android:name="com.google.android.gms.version"-->
+            <!--android:value="@integer/google_play_services_version" />-->
+
+        <service android:name=".FireBaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--<receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"-->
+            <!--android:permission="com.google.android.c2dm.permission.SEND">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+                <!--<category android:name="com.socialinfotech.feeedj" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<activity-->
+            <!--android:name=".SettingActivities.SettingsFragment"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/AppTheme_Afterlogin" />-->
+        <activity android:name=".SettingActivities.ChangePasswordActivity" />
+        <activity
+            android:name=".ApplicationActivities.FeaturedCompany"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme_Afterlogin" />
+        <!--<activity-->
+            <!--android:name=".ExploreActivities.CategoryFollowActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/AppTheme_Afterlogin" />-->
+        <activity android:name=".ApplicationActivities.PDFViewActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme_Afterlogin" />
+        <activity android:name=".ExploreActivities.CategoryTabActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme_Afterlogin" />
+        <activity android:name=".SearchActivity.SearchResultActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme_Afterlogin"/>
+
+        <!--<provider-->
+            <!--android:authorities="${applicationId}.FacebookInitProvider"-->
+            <!--android:name=".internal.FacebookInitProvider"-->
+            <!--android:exported="false" />-->
+
+    </application>
+</manifest>

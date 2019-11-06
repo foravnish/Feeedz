@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "572026924741",
+    "firebase_url": "https://feeedz-1469906205626.firebaseio.com",
+    "project_id": "feeedz-1469906205626",
+    "storage_bucket": "feeedz-1469906205626.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572026924741:android:a19703d8ae98f3bb",
+        "android_client_info": {
+          "package_name": "com.socialinfotech.feeedj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572026924741-ot4lv3aqp5ru41k8l67mvk95rblrmivi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJv3s4QPMdbmJa517gxC2HG-6d10FOvUc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

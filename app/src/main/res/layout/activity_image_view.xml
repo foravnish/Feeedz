@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_image_view_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ApplicationActivities.ImageViewActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.socialinfotech.feeedj.zoomablelibrary.ZoomableDraweeView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="@dimen/margin_40dp"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:background="@mipmap/ic_back_image_view"
+            android:src="@drawable/btn_selector" />
+
+        <LinearLayout
+            android:id="@+id/ll_image_view_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_image_view_buttons_overlay"
+            android:background="@mipmap/background_rating_popover_container"
+            android:layout_marginLeft="32dp"
+            android:padding="@dimen/margin_10dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:animateLayoutChanges="true"
+            android:layout_marginBottom="-10dp">
+
+            <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="ايش تقييمك للعرض؟"
+                android:textColor="#434343"
+                android:textSize="@dimen/txt_16sp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                app:customFont="@string/Boldfont" />
+
+            <RatingBar
+                android:id="@+id/r_bar_image_view_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="0.01"
+                android:numStars="5"
+                android:progressDrawable="@drawable/background_custom_rating_bar"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_image_view_buttons_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/background_buttons_overlay_image_view"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:id="@+id/ll_image_view_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/tv_image_view_share_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="مشاركة"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_14sp"
+                    app:customFont="@string/Boldfont" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:src="@mipmap/ic_share_image_view" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_image_view_rate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/tv_image_view_rate_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="عطنا رايك"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_14sp"
+                    app:customFont="@string/Boldfont" />
+
+                <ImageView
+                    android:id="@+id/iv_rate_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:src="@mipmap/ic_rate_image_view" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_image_view_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/tv_image_view_location_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="الموقع"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_14sp"
+                    app:customFont="@string/Boldfont" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:src="@mipmap/ic_location_imege_view" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_image_view_call"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/tv_image_view_call_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="اتصال"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_14sp"
+                    app:customFont="@string/Boldfont" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:src="@mipmap/ic_call_image_view" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>

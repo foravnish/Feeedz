@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity">
+
+    <WebView
+        android:id="@+id/pdfWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_brochure_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/toolbar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_above="@+id/v_separator_brochure_title_bar"
+                android:background="@color/brochure_top_and_bottom_bar_background">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvImage"
+                    android:layout_width="@dimen/margin_40dp"
+                    android:layout_height="@dimen/margin_40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="6dp"
+                    app:actualImageScaleType="fitXY"
+                    fresco:placeholderImage="@drawable/placeholder"
+                    fresco:roundedCornerRadius="5dp" />
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/txt_compnay_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:layout_toLeftOf="@+id/sdvImage"
+                    android:text="@string/app_name"
+                    android:textColor="#5b5b5b"
+                    android:textSize="@dimen/txt_14sp"
+                    app:customFont="@string/Boldfont" />
+
+                <ImageView
+                    android:id="@+id/iv_raw_timeline_feed_verified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_5dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_toLeftOf="@+id/txt_compnay_name"
+                    android:src="@mipmap/ic_timeline_feed_offer_verified" />
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:id="@+id/txt_compny_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_compnay_name"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:layout_toLeftOf="@+id/sdvImage"
+                    android:text="@string/app_name"
+                    android:textColor="#898989"
+                    android:textSize="@dimen/txt_12sp"
+                    app:customFont="@string/GloberSemifont" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdv_cateogory"
+                    android:layout_width="@dimen/margin_40dp"
+                    android:layout_height="@dimen/margin_40dp"
+                    android:layout_alignParentLeft="true"
+                    fresco:placeholderImage="@drawable/placeholder" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/v_separator_brochure_title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/brochure_top_bar_separator"/>
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_bg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/back"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btn_back"
+            android:layout_height="wrap_content" />
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:id="@+id/toolbar_pdf_view_heading"
+            app:customFont="@string/Boldfont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/webviewtitle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_18sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_pdf_view_toolbar_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                app:customFont="@string/Boldfont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BrochureToolbarShare"
+                android:textColor="@color/green"
+                android:textSize="@dimen/txt_15sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_8dp"
+                android:src="@mipmap/ic_brochure_share"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_brochure_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:id="@+id/v_separator_brochure_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/brochure_bottom_bar_separator"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/v_separator_brochure_bottom_bar"
+            android:gravity="center_vertical"
+            android:background="@color/brochure_top_and_bottom_bar_background">
+
+            <LinearLayout
+                android:id="@+id/ll_raw_offers_timer_and_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/ll_raw_feed_offer_end_type"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:weightSum="10">
+
+                    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                        android:id="@+id/tv_raw_feed_offer_end_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_weight="8.5"
+                        android:textColor="#80337b"
+                        android:textSize="@dimen/txt_15sp"
+                        app:customFont="@string/Boldfont" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/margin_15dp"
+                            android:background="@mipmap/ic_timeline_feed_time" />
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/separator_timeline_feed" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_raw_offers_timer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_5dp"
+                    android:visibility="gone"
+                    android:weightSum="4">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/txt_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/background_clock_digits"
+                            android:gravity="center"
+                            android:text="14"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_18sp"
+                            android:textStyle="bold"
+                            app:customFont="@string/GloberRegular" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/days"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_10sp"
+                            app:customFont="@string/GEThameenDemibold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/txt_hrs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/background_clock_digits"
+                            android:gravity="center"
+                            android:text="14"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_18sp"
+                            android:textStyle="bold"
+                            app:customFont="@string/GloberRegular" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_hrs"
+                            android:text="@string/hours"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_10sp"
+                            app:customFont="@string/GEThameenDemibold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/txt_minut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/background_clock_digits"
+                            android:gravity="center"
+                            android:text="14"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_18sp"
+                            android:textStyle="bold"
+                            app:customFont="@string/GloberRegular" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/txt_minut_hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/minutes"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_10sp"
+                            app:customFont="@string/GEThameenDemibold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/txt_scnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/background_clock_digits"
+                            android:gravity="center"
+                            android:text="14"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_18sp"
+                            android:textStyle="bold"
+                            app:customFont="@string/GloberRegular" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/txt_scond_hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seconds"
+                            android:textColor="@color/timer_text"
+                            android:textSize="@dimen/txt_10sp"
+                            app:customFont="@string/GEThameenDemibold" />
+                    </LinearLayout>
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="@dimen/margin_20dp"-->
+                    <!--android:layout_height="@dimen/margin_20dp"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:src="@drawable/clockicon" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_5dp"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:id="@+id/ll_raw_offers_rate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_raw_timeline_feed_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_timeline_feed_rate" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:text="عطنا رايك"
+                            android:textColor="@color/timeline_offer_buttons"
+                            android:textSize="@dimen/txt_14sp"
+                            app:customFont="@string/Boldfont" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_raw_offers_location"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_timeline_feed_location" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:text="الموقع"
+                            android:textColor="@color/timeline_offer_buttons"
+                            android:textSize="@dimen/txt_14sp"
+                            app:customFont="@string/Boldfont" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_raw_offers_call"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/margin_8dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_timeline_feed_call" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:text="اتصال"
+                            android:textColor="@color/timeline_offer_buttons"
+                            android:textSize="@dimen/txt_14sp"
+                            app:customFont="@string/Boldfont" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_timeline_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_brochure_bottom_bar"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="-6dp"
+        android:layout_marginRight="50dp"
+        android:background="@mipmap/background_rating_popover_container"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_10dp"
+        android:visibility="gone">
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:text="ايش تقييمك للعرض؟"
+            android:textColor="#434343"
+            android:textSize="@dimen/txt_16sp"
+            app:customFont="@string/Boldfont" />
+
+        <RatingBar
+            android:id="@+id/r_bar_brochure_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:progressDrawable="@drawable/background_custom_rating_bar"
+            android:stepSize="0.01" />
+    </LinearLayout>
+</RelativeLayout>

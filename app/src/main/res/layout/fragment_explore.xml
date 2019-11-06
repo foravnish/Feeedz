@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ExploreActivities.ExploreFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_bg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        >
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            app:customFont="@string/Boldfont"
+            android:layout_width="match_parent"
+            android:text="@string/Fourth_title"
+            android:textSize="@dimen/txt_18sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/search"
+            android:layout_alignParentRight="true"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_centerVertical="true"
+            android:id="@+id/btn_main_search"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </RelativeLayout>
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/ll_1"
+    android:layout_width="match_parent"
+
+    app:layout_heightPercent="25%"
+    android:weightSum="3"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/btn_telephone"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/cat_icon_1_tel"
+        android:padding="@dimen/margin_10dp"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/btn_ariline"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="@dimen/margin_10dp"
+        android:src="@drawable/cat_icon_2_airlines"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/btn_bank"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="@dimen/margin_10dp"
+        android:src="@drawable/cat_icon_3_banks"
+        android:layout_height="match_parent" />
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_2"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="25%"
+        android:weightSum="3"
+        android:layout_below="@+id/ll_1"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/btn_electronics"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:padding="@dimen/margin_10dp"
+            android:layout_weight="1"
+            android:src="@drawable/cat_icon_4_electronics"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/btn_travel"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/margin_10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/cat_icon_5_travel"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/btn_car"
+            android:layout_width="match_parent"
+            android:padding="@dimen/margin_10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1"
+            android:src="@drawable/cat_icon_6_cars"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_3"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="25%"
+        android:weightSum="3"
+        android:layout_below="@+id/ll_2"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/btn_resturant"
+            android:layout_width="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1"
+            android:padding="@dimen/margin_10dp"
+            android:src="@drawable/cat_icon_7_resturants"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/btn_supermarket"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/margin_10dp"
+            android:src="@drawable/cat_icon_8_supermarkets"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/btn_furniture"
+            android:layout_width="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1"
+            android:padding="@dimen/margin_10dp"
+            android:src="@drawable/cat_icon_9_fornetures"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_4"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="25%"
+        android:weightSum="3"
+        android:layout_below="@+id/ll_3"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/btn_cloths"
+            android:layout_width="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1"
+            android:padding="@dimen/margin_10dp"
+            android:src="@drawable/cat_icon_10_cloths"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/btn_health"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/margin_10dp"
+            android:src="@drawable/cat_icon_11_health"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/btn_other"
+            android:layout_width="match_parent"
+            android:padding="@dimen/margin_10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1"
+            android:src="@drawable/cat_icon_12_others"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
+</RelativeLayout>

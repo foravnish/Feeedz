@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#B82580</color>
+    <color name="colorPrimaryDark">#5e295a</color>
+    <color name="colorMidPurple">#7F007F</color>
+    <color name="colorAccent">#B82580</color>
+    <color name="dark_black">#2C1B38</color>
+    <color name="facebook_messenger_blue">#0084FF</color>
+    <color name="yellow">#EAE400</color>
+    <color name="green">#A7CB19</color>
+    <color name="black">#000000</color>
+    <color name="menu_selected_color">#281026</color>
+    <color name="menu_color">#5e295a</color>w
+    <color name="list_bg">#f2f0f5</color>
+    <color name="grey">#cecece</color>
+    <color name="white">#ffffff</color>
+    <color name="background_company_details">#fbfbfc</color>
+    <color name="transparent">#00000000</color>
+    <color name="trans_white">#50FF4081</color>
+    <color name="trans_black">#50000000</color>
+    <color name="list_grey">#e2e0e4</color>
+    <color name="header_color">#f2f0f5</color>
+    <color name="dark_green">#006400</color>
+    <color name="dark_grey">#808080</color>
+    <color name="timer_text">#4b2448</color>
+    <color name="number_of_offers">#3b3f2d</color>
+    <color name="timeline_offer_buttons">#80337b</color>
+    <color name="company_details_company_name">#434343</color>
+    <color name="company_details_company_description">#191919</color>
+    <color name="company_details_action_buttons_borders">#cac7ce</color>
+    <color name="company_details_tag">#797979</color>
+    <color name="company_details_open_now">#79a026</color>
+    <color name="company_details_action_buttons_text">#7d2b6b</color>
+    <color name="company_details_closed_now">#c52231</color>
+    <color name="company_details_hours_background">#f3f3f4</color>
+    <color name="company_details_similar_companies_border">#d7d3dc</color>
+
+
+    <color name="timeline_search_section_title">#434343</color>
+    <color name="timeline_search_section_separator">#bdbdbd</color>
+    <color name="timeline_search_section_buttons_labels">#383838</color>
+    <color name="brochure_top_and_bottom_bar_background">#f2f1f0f5</color>
+    <color name="brochure_top_bar_separator">#c0bfc5</color>
+    <color name="brochure_bottom_bar_separator">#80337b</color>
+    <color name="category_tab_unselected">#c3bdc3</color>
+    <color name="category_tab_title_separator">#b9b9b9</color>
+    <color name="open_closed_until_when">#79316a</color>
+
+
+    <color name="category_follow_list_number_of_offers">#3b3f2d</color>
+    <color name="timeline_search_trending_keyword_background">#a1348a</color>
+    <color name="timeline_brochure_badge">#606060</color>
+    <color name="timeline_brochure_title">#606060</color>
+</resources>

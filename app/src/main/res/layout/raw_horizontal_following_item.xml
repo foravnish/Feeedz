@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ll_elements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="1.5dp"
+            android:background="@drawable/bdr_selected_companies_avatar"
+            fresco:placeholderImage="@drawable/placeholder"
+            fresco:roundedCornerRadius="5dp" />
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:id="@+id/txt_compnay_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:text="@string/app_name"
+            android:textColor="#5e5e5e"
+            android:textSize="13sp"
+            app:customFont="@string/Boldfont" />
+
+        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+            android:id="@+id/txt_compny_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="#8a8a8a"
+            android:textSize="@dimen/txt_11sp"
+            app:customFont="@string/GloberSemifont" />
+
+        <CheckBox
+            android:id="@+id/chk_followed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:button="@drawable/timeline_selected_companies_check_follow" />
+</LinearLayout>

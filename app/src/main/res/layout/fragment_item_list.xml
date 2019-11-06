@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_timeline_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_below="@+id/toolbarmain"
+        android:background="#70296b"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <com.socialinfotech.feeedj.AppUtils.CustomEditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin_10dp"
+            android:background="@drawable/et_background_search"
+            android:drawableRight="@drawable/search"
+            android:gravity="center"
+            android:hint="@string/serch_hint"
+            android:imeOptions="actionSearch"
+            android:paddingRight="@dimen/margin_10dp"
+            android:singleLine="true"
+            app:customFont="@string/Boldfont" />
+    </RelativeLayout>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/list"
+        android:name="com.socialinfotech.feeedj.TimeLineActivities.TimelineFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_progress="@layout/view_progrss"
+        tools:context=".TimeLineActivities.TimelineFragment"
+        tools:listitem="@layout/fragment_item" />
+
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        android:id="@+id/txt_hint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_40dp"
+        android:layout_below="@+id/list"
+        android:background="@color/trans_black"
+        android:gravity="center"
+        android:text="@string/pullRefresh"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_14sp"
+        app:customFont="@string/Boldfont" />
+
+    <LinearLayout
+        android:id="@+id/ll_timeline_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="#CC000000"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:visibility="gone">
+
+        <ScrollView
+            android:id="@+id/sc_timeline_search_section"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.3"
+            android:scrollbars="none"
+            android:background="@color/list_bg"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true"
+                android:padding="24dp">
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:text="@string/TimelineSearchSectionTitleOne"
+                    android:textColor="@color/timeline_search_section_title"
+                    android:textSize="@dimen/txt_16sp"
+                    app:customFont="@string/Boldfont" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@color/timeline_search_section_separator" />
+
+                <com.socialinfotech.feeedj.AppUtils.CustomGridView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/grid_timeline_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="16dp"
+                    android:numColumns="3"
+                    android:gravity="center"
+                    android:stretchMode="columnWidth"
+                    android:horizontalSpacing="5dp"
+                    android:verticalSpacing="8dp"
+                    android:visibility="gone"
+                    android:scrollbars="none"
+                    android:overScrollMode="never"
+                    android:rotationY="180"
+                    android:isScrollContainer="false"/>
+
+                <ProgressBar
+                    android:id="@+id/pb_timeline_search_section"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" >
+                </ProgressBar>
+
+                <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/TimelineSearchSectionTitleTwo"
+                    android:textColor="@color/timeline_search_section_title"
+                    android:textSize="@dimen/txt_16sp"
+                    app:customFont="@string/Boldfont" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:background="@color/timeline_search_section_separator" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_margin="10dp"
+                    android:weightSum="3">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_timeline_search_section_btn_one"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left">
+
+                        <ImageView
+                            android:id="@+id/iv_timeline_search_section_btn_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_timeline_search_section_btn_one" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/tv_timeline_search_section_btn_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@id/iv_timeline_search_section_btn_one"
+                            android:layout_alignLeft="@id/iv_timeline_search_section_btn_one"
+                            android:layout_alignRight="@id/iv_timeline_search_section_btn_one"
+                            android:layout_alignTop="@id/iv_timeline_search_section_btn_one"
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal|bottom"
+                            android:text="@string/TimelineSearchSectionButtonOne"
+                            android:textColor="@color/timeline_search_section_buttons_labels"
+                            android:textSize="@dimen/txt_15sp"
+                            app:customFont="@string/Boldfont" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_timeline_search_section_btn_two"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/iv_timeline_search_section_btn_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_timeline_search_section_btn_two" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/tv_timeline_search_section_btn_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@id/iv_timeline_search_section_btn_two"
+                            android:layout_alignLeft="@id/iv_timeline_search_section_btn_two"
+                            android:layout_alignRight="@id/iv_timeline_search_section_btn_two"
+                            android:layout_alignTop="@id/iv_timeline_search_section_btn_two"
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal|bottom"
+                            android:text="@string/TimelineSearchSectionButtonTwo"
+                            android:textColor="@color/timeline_search_section_buttons_labels"
+                            android:textSize="@dimen/txt_15sp"
+                            app:customFont="@string/Boldfont" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_timeline_search_section_btn_three"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:id="@+id/iv_timeline_search_section_btn_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_timeline_search_section_btn_three" />
+
+                        <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+                            android:id="@+id/tv_timeline_search_section_btn_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignBottom="@id/iv_timeline_search_section_btn_three"
+                            android:layout_alignLeft="@id/iv_timeline_search_section_btn_three"
+                            android:layout_alignRight="@id/iv_timeline_search_section_btn_three"
+                            android:layout_alignTop="@id/iv_timeline_search_section_btn_three"
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal|bottom"
+                            android:text="@string/TimelineSearchSectionButtonThree"
+                            android:textColor="@color/timeline_search_section_buttons_labels"
+                            android:textSize="@dimen/txt_15sp"
+                            app:customFont="@string/Boldfont" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"/>
+            </LinearLayout>
+        </ScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorMidPurple"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+</RelativeLayout>

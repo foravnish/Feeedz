@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/list_bg"
+    android:orientation="horizontal">
+
+
+    <com.socialinfotech.feeedj.AppUtils.TextViewPlus
+        app:customFont="@string/Boldfont"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/margin_10dp"
+        android:text="@string/list_footer"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_18sp"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
