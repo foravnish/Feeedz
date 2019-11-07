@@ -1,5 +1,6 @@
 package com.socialinfotech.feeedj.TimeLineActivities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,7 +62,7 @@ class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public static ArrayList<GetAllOffersResponse> mValuesBrochures;
     private List<HeaderViewHolder> lstHolders;
     private Handler mHandler = new Handler();
-    Context mContext;
+    Activity mContext;
     private static final int TYPE_BROCHURE = 0;
     private static final int TYPE_FEEDS = 1;
     private static final int TYPE_HORIZONTAL = 2;
@@ -103,7 +104,7 @@ class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     };
 
-    public MyItemRecyclerViewAdapter(GetAllOffersResponse[] getAllOffersResponses, Context cnt) {
+    public MyItemRecyclerViewAdapter(GetAllOffersResponse[] getAllOffersResponses, Activity cnt) {
         mValues = getAllOffersResponses;
         mValuesBrochures = new ArrayList<>();
         for (int i = 0; i < mValues.length; i++) {

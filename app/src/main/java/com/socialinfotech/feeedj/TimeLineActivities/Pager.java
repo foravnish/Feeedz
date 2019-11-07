@@ -1,10 +1,15 @@
 package com.socialinfotech.feeedj.TimeLineActivities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Point;
 import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +28,10 @@ public class Pager extends PagerAdapter {
 
     List<GetAllOffersResponse> views;
     List<GetAllOffersResponse.OffersImagesBeans> imagesBeans;
-    Context context;
+    Activity context;
     LayoutInflater mLayoutInflater;
 
-    public Pager(List<GetAllOffersResponse> views, Context context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans) {
+    public Pager(List<GetAllOffersResponse> views, Activity context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
@@ -57,37 +62,43 @@ public class Pager extends PagerAdapter {
         final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
         imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
 
+//        Display display = context.getWindowManager().getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
+//        int screenWidth = size.x;
+//        int screenHeight = size.y;
+
+
         if (views.get(position ).getOfferImageCoord() != null) {
             String[] sImageDimensions = views.get(position ).getOfferImageCoord().split("x");
             if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-                imageView.setAspectRatio(1);
+               imageView.setAspectRatio(1);
             } else {
                 imageView.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
             }
+//            imageView.setAspectRatio(1);
         }
 
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("co-ords", "" + views.get(position).getOfferImage());
-                String str = views.get(position ).getAttachmentHTML();
+        imageView.setOnClickListener(v -> {
+            Log.e("co-ords", "" + views.get(position).getOfferImage());
+            String str = views.get(position ).getAttachmentHTML();
 //                if (str == null) {
-                    Intent intent = new Intent(context, ImageViewActivity.class);
-                    intent.putExtra(Constant.ImageNAme, imagesBeans.get(position).getImage());
-                    intent.putExtra(Constant.TextTile, views.get(position ).getOfferTitle());
-                    intent.putExtra(Constant.OfferLocation, views.get(position ).getOfferLocation());
-                    intent.putExtra(Constant.PhoneNumber, views.get(position ).getPhoneNumber());
-                    intent.putExtra(Constant.OfferID, views.get(position ).getOfferId());
-                    intent.putExtra(Constant.OFFER_RATING_STATUS, views.get(position ).getOfferRating());
-                    int[] screenLocation = new int[2];
-                    imageView.getLocationOnScreen(screenLocation);
+                Intent intent = new Intent(context, ImageViewActivity.class);
+                intent.putExtra(Constant.ImageNAme, imagesBeans.get(position).getImage());
+                intent.putExtra(Constant.TextTile, views.get(position ).getOfferTitle());
+                intent.putExtra(Constant.OfferLocation, views.get(position ).getOfferLocation());
+                intent.putExtra(Constant.PhoneNumber, views.get(position ).getPhoneNumber());
+                intent.putExtra(Constant.OfferID, views.get(position ).getOfferId());
+                intent.putExtra(Constant.OFFER_RATING_STATUS, views.get(position ).getOfferRating());
+                int[] screenLocation = new int[2];
+                imageView.getLocationOnScreen(screenLocation);
 
-                    intent.putExtra("left", screenLocation[0]).
-                            putExtra("top", screenLocation[1]).
-                            putExtra("width", imageView.getWidth()).
-                            putExtra("height", imageView.getHeight());
-                    context.startActivity(intent);
+                intent.putExtra("left", screenLocation[0]).
+                        putExtra("top", screenLocation[1]).
+                        putExtra("width", imageView.getWidth()).
+                        putExtra("height", imageView.getHeight());
+                context.startActivity(intent);
 
 //                } else {
 //                    Intent intent = new Intent(context, PDFViewActivity.class);
@@ -107,7 +118,6 @@ public class Pager extends PagerAdapter {
 //                    intent.putExtra("OFFER_TIME_END", views.get(position ).getOfferTimeEnd());
 //                    context.startActivity(intent);
 //                }
-            }
         });
 
         container.addView(itemView);

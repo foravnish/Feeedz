@@ -166,6 +166,7 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
                     headerHolder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
                 }
             }
+            //headerHolder.sdv_add_iamge.setAspectRatio(1);
 
             synchronized (lstHolders) {
                 lstHolders.add(headerHolder);

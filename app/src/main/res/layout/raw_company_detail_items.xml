@@ -119,12 +119,15 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/margin_5dp"
                 android:layout_weight="0.078"
+                android:layout_marginLeft="50dp"
                 android:gravity="center_vertical">
 
                 <ImageView
                     android:id="@+id/iv_raw_company_detail_dot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:src="@mipmap/ic_timeline_feed_dot" />
             </LinearLayout>
         </LinearLayout>
