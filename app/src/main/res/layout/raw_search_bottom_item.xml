@@ -119,7 +119,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/margin_5dp"
                 android:layout_weight="0.078"
-                android:layout_marginLeft="50dp"
+
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -128,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="4dp"
                     android:src="@mipmap/ic_timeline_feed_dot" />
             </LinearLayout>
         </LinearLayout>

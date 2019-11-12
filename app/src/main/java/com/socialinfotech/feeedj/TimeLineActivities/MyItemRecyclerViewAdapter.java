@@ -221,74 +221,21 @@ class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 Typeface typeface_txt_add_title = Typeface.createFromAsset(mContext.getAssets(), "demibold.ttf");
                 headerHolder.txt_add_title.setTypeface(typeface_txt_add_title);
 
-//            if (offerTitle.contains("#")) {
-//                    SpannableString ss = new SpannableString(offerTitle);
-//                    ClickableSpan span1 = new ClickableSpan() {
-//                        @Override
-//                        public void onClick(View textView) {
-//                            Log.e("span1", "clicked");
-//                        }
-//                    };
-//
-//                    ClickableSpan span2 = new ClickableSpan() {
-//                        @Override
-//                        public void onClick(View textView) {
-//                            Log.e("span2", "clicked");
-//                        }
-//                    };
-//
-//                    int hashStartIndex = offerTitle.indexOf("#");
-//
-//                try {
-//                    ss.setSpan(span1, hashStartIndex, offerTitle.indexOf(" ", hashStartIndex), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                } catch (IndexOutOfBoundsException e) {
-//                    Log.e("outOfBound", "" + e);
-//                    ss.setSpan(span1, hashStartIndex, offerTitle.indexOf(offerTitle.length(), hashStartIndex), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                }
-////                  ss.setSpan(span2, 6, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//
-//                    headerHolder.txt_add_title.setText(ss);
-//                    headerHolder.txt_add_title.setMovementMethod(LinkMovementMethod.getInstance());
-//
-////                SpannableString ss = new SpannableString(offerTitle);
-////
-////                Pattern p = Pattern.compile("[#@][\\u0621-\\u064A\\u0660-\\u0669a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[\\u0621-\\u064A\\u0660-\\u0669a-zA-Z0-9][\\u0621-\\u064A\\u0660-\\u0669a-zA-Z0-9\\-]{0,64}(\\.[\\u0621-\\u064A\\u0660-\\u0669a-zA-Z0-9][\\u0621-\\u064A\\u0660-\\u0669a-zA-Z0-9\\-]{0,25})+"); //match letters or numbers after a # or @
-////                Matcher m = p.matcher(offerTitle); //get matcher, applying the pattern to caption string
-////                while (m.find()) { // Find each match in turn
-////                    ClickableSpan clickableSpan = new ClickableSpan() {
-////                        @Override
-////                        public void onClick(View textView) {
-////                            //Clicked word
-////                            Log.e("clicked#", "" + textView.toString());
-////                        }
-////                    };
-////                    ss.setSpan(clickableSpan, m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-////                }
-////
-////                headerHolder.txt_add_title.setText(ss);
-////                headerHolder.txt_add_title.setMovementMethod(LinkMovementMethod.getInstance());
-//
-//            } else {
-//                headerHolder.txt_add_title.setText(offerTitle);
-//            }
 
                 headerHolder.sdvImage.setImageURI(Uri.parse(mValues[position - 1].getCompany().getCompanyProfilePhoto()));
 
 
                 pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages());
                 headerHolder.view_pager.setAdapter(pagerAdapter);
-                headerHolder.view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                if (mValues[position-1].getOfferImages().size()>1) {
+                //headerHolder.view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                if (mValues[position-1].getMultiple()) {
+                    headerHolder.indicator.setVisibility(View.VISIBLE);
                     headerHolder.indicator.setViewPager(headerHolder.view_pager);
                 }
+                else{
+                    headerHolder.indicator.setVisibility(View.GONE);
+                }
 
-//                ViewGroup.LayoutParams layoutParams = viewLayout.getLayoutParams();
-//                layoutParams.height =  ViewGroup.LayoutParams.WRAP_CONTENT;
-//                viewLayout.setLayoutParams(layoutParams);
-
-//                headerHolder.view_pager.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Math.max(ViewGroup.LayoutParams.WRAP_CONTENT, 1)));
-
-                //headerHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position - 1].getOfferImage()));
                 if (mValues[position - 1].getOfferImageCoord() != null) {
                     String[] sImageDimensions = mValues[position - 1].getOfferImageCoord().split("x");
                     if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {

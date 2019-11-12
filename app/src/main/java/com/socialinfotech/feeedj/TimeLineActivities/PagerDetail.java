@@ -57,14 +57,21 @@ public class PagerDetail extends PagerAdapter {
         final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
         imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
 
+
         if (imagesBeans.get(position ).getCoord() != null) {
-            String[] sImageDimensions = imagesBeans.get(position ).getCoord().split("x");
-            if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-                imageView.setAspectRatio(1);
-            } else {
-                imageView.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
+            String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
+            if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) < 700) {
+                imageView.setAspectRatio((float)1.3);
             }
+            else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
+                imageView.setAspectRatio((float)1.8);
+            } else {
+                imageView.setAspectRatio(1);
+            }
+        } else{
+            imageView.setAspectRatio(1);
         }
+
 
 
         imageView.setOnClickListener(new View.OnClickListener() {

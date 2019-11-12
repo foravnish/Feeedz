@@ -110,6 +110,7 @@
                 android:layout_weight="0.922"
                 android:textColor="#434343"
                 android:textSize="@dimen/txt_16sp"
+                android:gravity="right"
                 app:customFont="@string/Boldfont" />
 
             <LinearLayout
@@ -117,7 +118,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/margin_5dp"
                 android:layout_weight="0.078"
-                android:layout_marginLeft="50dp"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -126,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_marginLeft="4dp"
                     android:src="@mipmap/ic_timeline_feed_dot" />
             </LinearLayout>
         </LinearLayout>
@@ -159,6 +160,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:visibility="gone"
                 app:ci_drawable="@drawable/circleindicator_round"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:layout_gravity="bottom|center"/>

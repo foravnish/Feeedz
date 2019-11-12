@@ -152,7 +152,11 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((VHItem) holder).view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         if (mValues.getOffers().get(position).getOfferImages().size()>1) {
+            ((VHItem) holder).indicator.setVisibility(View.VISIBLE);
             ((VHItem) holder).indicator.setViewPager(((VHItem) holder).view_pager);
+        }
+        else{
+            ((VHItem) holder).indicator.setVisibility(View.GONE);
         }
 
         if (mValues.getOffers().get(position).getOfferImageCoord() != null) {

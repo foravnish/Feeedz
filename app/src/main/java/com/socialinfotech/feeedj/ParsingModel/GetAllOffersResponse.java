@@ -42,6 +42,7 @@ public class GetAllOffersResponse {
     private String OfferLocation;
     private String phoneNumber;
     private String BrochureBadge;
+    private boolean IsMultiple;
     private List<OffersImagesBeans> OfferImages;
     /**
      * CompanyId : 35
@@ -206,6 +207,14 @@ public class GetAllOffersResponse {
         return BrochureBadge;
     }
 
+    public void setMultiple(Boolean multiple) {
+        IsMultiple = multiple;
+    }
+
+    public Boolean getMultiple() {
+        return IsMultiple;
+    }
+
     public CompanyBean getCompany() {
         return Company;
     }
@@ -264,6 +273,7 @@ public class GetAllOffersResponse {
 
     public class OffersImagesBeans {
         private String image;
+        private String coord;
 
         public String getImage() {
             return image;
@@ -271,6 +281,14 @@ public class GetAllOffersResponse {
 
         public void setImage(String image) {
             this.image = image;
+        }
+
+        public String getCoord() {
+            return coord;
+        }
+
+        public void setCoord(String coord) {
+            this.coord = coord;
         }
     }
 

@@ -69,19 +69,25 @@ public class Pager extends PagerAdapter {
 //        int screenHeight = size.y;
 
 
-        if (views.get(position ).getOfferImageCoord() != null) {
-            String[] sImageDimensions = views.get(position ).getOfferImageCoord().split("x");
-            if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-               imageView.setAspectRatio(1);
-            } else {
-                imageView.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
+        if (imagesBeans.get(position).getCoord() != null) {
+            String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
+            if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) < 700) {
+                imageView.setAspectRatio((float)1.3);
             }
-//            imageView.setAspectRatio(1);
+           else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
+               imageView.setAspectRatio((float)1.8);
+            }else {
+                imageView.setAspectRatio(1);
+            }
+        } else{
+            imageView.setAspectRatio(1);
         }
 
 
         imageView.setOnClickListener(v -> {
-            Log.e("co-ords", "" + views.get(position).getOfferImage());
+            Log.e("co-ords", "" + imagesBeans.get(position).getImage());
+            Log.e("co-ords", "" + imagesBeans.get(position).getCoord());
+
             String str = views.get(position ).getAttachmentHTML();
 //                if (str == null) {
                 Intent intent = new Intent(context, ImageViewActivity.class);
