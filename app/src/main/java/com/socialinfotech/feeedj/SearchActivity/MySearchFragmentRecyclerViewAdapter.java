@@ -173,7 +173,7 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
         searchViewHolder.sdvImage.setImageURI(Uri.parse(mValues[position - 1].getCompany().getCompanyProfilePhoto()));
         //searchViewHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position - 1].getOfferImage()));
 
-            pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage());
+            pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage(),mValues[position-1].getAttachmentHTML(),mValues[position-1].getCompany());
             searchViewHolder.view_pager.setAdapter(pagerAdapter);
 
             if (mValues[position-1].getMultiple()) {

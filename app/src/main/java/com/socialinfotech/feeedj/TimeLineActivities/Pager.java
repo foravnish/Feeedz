@@ -30,13 +30,17 @@ public class Pager extends PagerAdapter {
     List<GetAllOffersResponse.OffersImagesBeans> imagesBeans;
     Activity context;
     String img;
+    String htmlImage;
+    GetAllOffersResponse.CompanyBean companyBean;
     LayoutInflater mLayoutInflater;
 
-    public Pager(List<GetAllOffersResponse> views, Activity context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans, String img) {
+    public Pager(List<GetAllOffersResponse> views, Activity context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans, String img, String htmlImage, GetAllOffersResponse.CompanyBean companyBean) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
         this.img=img;
+        this.htmlImage=htmlImage;
+        this.companyBean=companyBean;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -103,7 +107,7 @@ public class Pager extends PagerAdapter {
 
             if (views.get(position ).getMultiple()) {
 
-                String str = views.get(position).getAttachmentHTML();
+                String str = htmlImage;
 //                if (str == null) {
                 Intent intent = new Intent(context, ImageViewActivity.class);
                 intent.putExtra(Constant.ImageNAme, imagesBeans.get(position).getImage());
@@ -124,24 +128,24 @@ public class Pager extends PagerAdapter {
 //                } else {
 //                    Intent intent = new Intent(context, PDFViewActivity.class);
 //                    intent.putExtra("OFFER_ID", views.get(position ).getOfferId());
-//                    intent.putExtra("OFFER_IMAGE", views.get(position ).getOfferImage());
-//                    intent.putExtra("BROCHURE_PDF_URL", views.get(position ).getAttachmentHTML());
-//                    intent.putExtra("BROCHURE_PDF_TITLE", views.get(position ).getCompany().getCompanyName_Ar());
-//                    intent.putExtra("COMPANY_NAME", views.get(position ).getCompany().getCompanyName_Ar());
-//                    intent.putExtra("COMPANY_USER_NAME", views.get(position).getCompany().getCompanyName());
-//                    intent.putExtra("COMPANY_VERIFIED", views.get(position ).getCompany().isCompanyVerified());
+//                    intent.putExtra("OFFER_IMAGE", imagesBeans.get(position).getImage());
+//                    intent.putExtra("BROCHURE_PDF_URL", htmlImage);
+//                    intent.putExtra("BROCHURE_PDF_TITLE", companyBean.getCompanyName_Ar());
+//                    intent.putExtra("COMPANY_NAME", companyBean.getCompanyName_Ar());
+//                    intent.putExtra("COMPANY_USER_NAME", companyBean.getCompanyName());
+//                    intent.putExtra("COMPANY_VERIFIED", companyBean.isCompanyVerified());
 //                    intent.putExtra("COMPANY_LOCATION", views.get(position ).getOfferLocation());
 //                    intent.putExtra("COMPANY_PHONE_NUMBER", views.get(position ).getPhoneNumber());
 //                    intent.putExtra("OFFER_END_TYPE", views.get(position ).getOfferEndType());
 //                    intent.putExtra(Constant.COMPANY_ID, views.get(position ).getCompanyId());
 //                    intent.putExtra("COMPANY_TAG_ID", views.get(position).getCompanyTagId());
-//                    intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, views.get(position ).getCompany().getCompanyProfilePhoto());
+//                    intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, companyBean.getCompanyProfilePhoto());
 //                    intent.putExtra("OFFER_TIME_END", views.get(position ).getOfferTimeEnd());
 //                    context.startActivity(intent);
 //                }
             }else{
-                String str = views.get(position).getAttachmentHTML();
-//                if (str == null) {
+                String str = htmlImage;
+                if (str == null) {
                 Intent intent = new Intent(context, ImageViewActivity.class);
                 intent.putExtra(Constant.ImageNAme, img);
                 intent.putExtra(Constant.TextTile, views.get(position).getOfferTitle());
@@ -157,6 +161,24 @@ public class Pager extends PagerAdapter {
                         putExtra("width", imageView.getWidth()).
                         putExtra("height", imageView.getHeight());
                 context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, PDFViewActivity.class);
+                    intent.putExtra("OFFER_ID", views.get(position ).getOfferId());
+                    intent.putExtra("OFFER_IMAGE", imagesBeans.get(position).getImage());
+                    intent.putExtra("BROCHURE_PDF_URL", htmlImage);
+                    intent.putExtra("BROCHURE_PDF_TITLE", companyBean.getCompanyName_Ar());
+                    intent.putExtra("COMPANY_NAME", companyBean.getCompanyName_Ar());
+                    intent.putExtra("COMPANY_USER_NAME", companyBean.getCompanyName());
+                    intent.putExtra("COMPANY_VERIFIED", companyBean.isCompanyVerified());
+                    intent.putExtra("COMPANY_LOCATION", views.get(position ).getOfferLocation());
+                    intent.putExtra("COMPANY_PHONE_NUMBER", views.get(position ).getPhoneNumber());
+                    intent.putExtra("OFFER_END_TYPE", views.get(position ).getOfferEndType());
+                    intent.putExtra(Constant.COMPANY_ID, views.get(position ).getCompanyId());
+                    intent.putExtra("COMPANY_TAG_ID", views.get(position).getCompanyTagId());
+                    intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, companyBean.getCompanyProfilePhoto());
+                    intent.putExtra("OFFER_TIME_END", views.get(position ).getOfferTimeEnd());
+                    context.startActivity(intent);
+                }
             }
         });
 

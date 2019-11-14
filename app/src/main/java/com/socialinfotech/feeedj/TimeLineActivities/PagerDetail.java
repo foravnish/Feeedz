@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
 import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
+import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
 import com.socialinfotech.feeedj.ParsingModel.GetCompnayDetailResponse;
 import com.socialinfotech.feeedj.R;
@@ -27,13 +28,14 @@ public class PagerDetail extends PagerAdapter {
     LayoutInflater mLayoutInflater;
     String img;
     Boolean flag;
-
-    public PagerDetail(List<GetCompnayDetailResponse> views, Context context, List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans,String img,Boolean flag) {
+    String htmlImage;
+    public PagerDetail(List<GetCompnayDetailResponse> views, Context context, List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans,String img,Boolean flag,String htmlImage) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
         this.img=img;
         this.flag=flag;
+        this.htmlImage=htmlImage;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -112,21 +114,41 @@ public class PagerDetail extends PagerAdapter {
                             putExtra("height", imageView.getHeight());
                     context.startActivity(intent);
                 }else{
-                    Intent intent = new Intent(context, ImageViewActivity.class);
-                    intent.putExtra(Constant.ImageNAme, img);
-//                intent.putExtra(Constant.TextTile, views.get(position ).getOfferTitle());
-//                intent.putExtra(Constant.OfferLocation, views.get(position ).getOfferLocation());
-                    // intent.putExtra(Constant.PhoneNumber, views.get(position ).getPhoneNumber());
-//                intent.putExtra(Constant.OfferID, views.get(position ).getOfferId());
-//                intent.putExtra(Constant.OFFER_RATING_STATUS, views.get(position ).getOfferRating());
-                    int[] screenLocation = new int[2];
-                    imageView.getLocationOnScreen(screenLocation);
+                    String str = htmlImage;
+                    if (str == null) {
+                        Intent intent = new Intent(context, ImageViewActivity.class);
+                        intent.putExtra(Constant.ImageNAme, img);
+                        intent.putExtra(Constant.TextTile, "");
+                        intent.putExtra(Constant.OfferLocation, "");
+                        intent.putExtra(Constant.PhoneNumber, views.get(position).getPhoneNumber());
+                        intent.putExtra(Constant.OfferID, "");
+                        intent.putExtra(Constant.OFFER_RATING_STATUS, "");
+                        int[] screenLocation = new int[2];
+                        imageView.getLocationOnScreen(screenLocation);
 
-                    intent.putExtra("left", screenLocation[0]).
-                            putExtra("top", screenLocation[1]).
-                            putExtra("width", imageView.getWidth()).
-                            putExtra("height", imageView.getHeight());
-                    context.startActivity(intent);
+                        intent.putExtra("left", screenLocation[0]).
+                                putExtra("top", screenLocation[1]).
+                                putExtra("width", imageView.getWidth()).
+                                putExtra("height", imageView.getHeight());
+                        context.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(context, PDFViewActivity.class);
+                        intent.putExtra("OFFER_ID", "");
+                        intent.putExtra("OFFER_IMAGE", imagesBeans.get(position).getImage());
+                        intent.putExtra("BROCHURE_PDF_URL", htmlImage);
+                        intent.putExtra("BROCHURE_PDF_TITLE", "");
+                        intent.putExtra("COMPANY_NAME", "");
+                        intent.putExtra("COMPANY_USER_NAME", "");
+                        intent.putExtra("COMPANY_VERIFIED", "");
+                        intent.putExtra("COMPANY_LOCATION", "");
+                        intent.putExtra("COMPANY_PHONE_NUMBER", views.get(position ).getPhoneNumber());
+                        intent.putExtra("OFFER_END_TYPE", "");
+                        intent.putExtra(Constant.COMPANY_ID, views.get(position ).getCompanyId());
+                        intent.putExtra("COMPANY_TAG_ID", "");
+                        intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, "");
+                        intent.putExtra("OFFER_TIME_END", "");
+                        context.startActivity(intent);
+                    }
                 }
 
 
