@@ -147,7 +147,7 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 //            ((VHItem) holder).sdv_add_iamge.setImageURI(Uri.parse(mValues.getOffers().get(position).getOfferImage()));
 
-        pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages());
+        pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages(),mValues.getOffers().get(position).getOfferImage(),mValues.getMultiple());
         ((VHItem) holder).view_pager.setAdapter(pagerAdapter);
         ((VHItem) holder).view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 

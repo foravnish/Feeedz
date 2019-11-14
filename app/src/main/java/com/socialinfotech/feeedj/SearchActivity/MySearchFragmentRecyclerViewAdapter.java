@@ -27,6 +27,7 @@ import com.luseen.autolinklibrary.AutoLinkMode;
 import com.luseen.autolinklibrary.AutoLinkOnClickListener;
 import com.luseen.autolinklibrary.AutoLinkTextView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.HeightWrappingViewPager;
 import com.socialinfotech.feeedj.AppUtils.TextViewPlus;
 import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.Home;
@@ -35,15 +36,19 @@ import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ExploreActivities.CategoryTabActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetSearchResponse;
 import com.socialinfotech.feeedj.R;
+import com.socialinfotech.feeedj.TimeLineActivities.PagerCategory;
 import com.socialinfotech.feeedj.TimeLineActivities.ViewCompanyDetailsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 
 public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -55,6 +60,7 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
     Context mContext;
     SharedPreferences sPref;
     SharedPreferences.Editor editor;
+    PagerCategory pagerAdapter;
     private ArrayList<GetSearchResponse.CompanyBean> companiesList;
 
     private static final int TYPE_HORIZONTAL = 0;
@@ -165,15 +171,26 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
         searchViewHolder.txt_add_title.setTypeface(typeface_txt_add_title);
 
         searchViewHolder.sdvImage.setImageURI(Uri.parse(mValues[position - 1].getCompany().getCompanyProfilePhoto()));
-        searchViewHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position - 1].getOfferImage()));
+        //searchViewHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position - 1].getOfferImage()));
+
+            pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage());
+            searchViewHolder.view_pager.setAdapter(pagerAdapter);
+
+            if (mValues[position-1].getMultiple()) {
+                searchViewHolder.indicator.setVisibility(View.VISIBLE);
+                searchViewHolder.indicator.setViewPager(searchViewHolder.view_pager);
+            }
+            else{
+                searchViewHolder.indicator.setVisibility(View.GONE);
+            }
 
 
             if (mValues[position - 1].getOfferImageCoord() != null) {
                 String[] sImageDimensions = mValues[position - 1].getOfferImageCoord().split("x");
                 if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-                    searchViewHolder.sdv_add_iamge.setAspectRatio(1);
+                  //  searchViewHolder.sdv_add_iamge.setAspectRatio(1);
                 } else {
-                    searchViewHolder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
+                   // searchViewHolder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
                 }
             }
 
@@ -183,52 +200,52 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
         }
         searchViewHolder.updateTimeRemaining(System.currentTimeMillis());
         searchViewHolder.sdv_cateogory.setImageURI(setCopmnyImage(mValues[position - 1].getCompanyTagId()));
-        searchViewHolder.sdv_add_iamge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ImageViewActivity.class);
-//                intent.putExtra(Constant.ImageNAme,mValues[position - 1].getOfferImage());
-//                intent.putExtra(Constant.TextTile,mValues[position - 1].getOfferTitle());
-//                mContext.startActivity(intent);
-                String str = mValues[position - 1].getAttachmentHTML();
-                if (str==null) {
-                    Intent intent = new Intent(mContext, ImageViewActivity.class);
-                    intent.putExtra(Constant.ImageNAme, mValues[position - 1].getOfferImage());
-                    intent.putExtra(Constant.TextTile, mValues[position - 1].getOfferTitle());
-                    intent.putExtra(Constant.OfferLocation, mValues[position - 1].getOfferLocation());
-                    intent.putExtra(Constant.PhoneNumber, mValues[position - 1].getPhoneNumber());
-                    intent.putExtra(Constant.OfferID, mValues[position - 1].getOfferId());
-                    intent.putExtra(Constant.OFFER_RATING_STATUS, mValues[position - 1].getOfferRating());
-
-                    int[] screenLocation = new int[2];
-                    searchViewHolder.sdv_add_iamge.getLocationOnScreen(screenLocation);
-
-                    intent.putExtra("left", screenLocation[0]).
-                            putExtra("top", screenLocation[1]).
-                            putExtra("width", searchViewHolder.sdv_add_iamge.getWidth()).
-                            putExtra("height", searchViewHolder.sdv_add_iamge.getHeight());
-                    mContext.startActivity(intent);
-
-                }else {
-                    Intent intent = new Intent(mContext, PDFViewActivity.class);
-                    intent.putExtra("OFFER_ID", mValues[position - 1].getOfferId());
-                    intent.putExtra("OFFER_IMAGE", mValues[position - 1].getOfferImage());
-                    intent.putExtra("BROCHURE_PDF_URL", mValues[position - 1].getAttachmentHTML());
-                    intent.putExtra("BROCHURE_PDF_TITLE", mValues[position - 1].getCompany().getCompanyName_Ar());
-                    intent.putExtra("COMPANY_NAME", mValues[position - 1].getCompany().getCompanyName_Ar());
-                    intent.putExtra("COMPANY_USER_NAME", mValues[position - 1].getCompany().getCompanyName());
-                    intent.putExtra("COMPANY_VERIFIED", mValues[position - 1].isCompanyVerified());
-                    intent.putExtra("COMPANY_LOCATION", mValues[position - 1].getOfferLocation());
-                    intent.putExtra("COMPANY_PHONE_NUMBER", mValues[position - 1].getPhoneNumber());
-                    intent.putExtra("OFFER_END_TYPE", mValues[position - 1].getOfferEndType());
-                    intent.putExtra("COMPANY_ID", mValues[position - 1].getCompanyId());
-                    intent.putExtra("COMPANY_TAG_ID", mValues[position - 1].getCompanyTagId());
-                    intent.putExtra("COMPANY_PROFILE_PHOTO", mValues[position - 1].getCompany().getCompanyProfilePhoto());
-                    intent.putExtra("OFFER_TIME_END", mValues[position - 1].getOfferTimeEnd());
-                    mContext.startActivity(intent);
-                }
-            }
-        });
+//        searchViewHolder.sdv_add_iamge.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(mContext, ImageViewActivity.class);
+////                intent.putExtra(Constant.ImageNAme,mValues[position - 1].getOfferImage());
+////                intent.putExtra(Constant.TextTile,mValues[position - 1].getOfferTitle());
+////                mContext.startActivity(intent);
+//                String str = mValues[position - 1].getAttachmentHTML();
+//                if (str==null) {
+//                    Intent intent = new Intent(mContext, ImageViewActivity.class);
+//                    intent.putExtra(Constant.ImageNAme, mValues[position - 1].getOfferImage());
+//                    intent.putExtra(Constant.TextTile, mValues[position - 1].getOfferTitle());
+//                    intent.putExtra(Constant.OfferLocation, mValues[position - 1].getOfferLocation());
+//                    intent.putExtra(Constant.PhoneNumber, mValues[position - 1].getPhoneNumber());
+//                    intent.putExtra(Constant.OfferID, mValues[position - 1].getOfferId());
+//                    intent.putExtra(Constant.OFFER_RATING_STATUS, mValues[position - 1].getOfferRating());
+//
+//                    int[] screenLocation = new int[2];
+//                    searchViewHolder.sdv_add_iamge.getLocationOnScreen(screenLocation);
+//
+//                    intent.putExtra("left", screenLocation[0]).
+//                            putExtra("top", screenLocation[1]).
+//                            putExtra("width", searchViewHolder.sdv_add_iamge.getWidth()).
+//                            putExtra("height", searchViewHolder.sdv_add_iamge.getHeight());
+//                    mContext.startActivity(intent);
+//
+//                }else {
+//                    Intent intent = new Intent(mContext, PDFViewActivity.class);
+//                    intent.putExtra("OFFER_ID", mValues[position - 1].getOfferId());
+//                    intent.putExtra("OFFER_IMAGE", mValues[position - 1].getOfferImage());
+//                    intent.putExtra("BROCHURE_PDF_URL", mValues[position - 1].getAttachmentHTML());
+//                    intent.putExtra("BROCHURE_PDF_TITLE", mValues[position - 1].getCompany().getCompanyName_Ar());
+//                    intent.putExtra("COMPANY_NAME", mValues[position - 1].getCompany().getCompanyName_Ar());
+//                    intent.putExtra("COMPANY_USER_NAME", mValues[position - 1].getCompany().getCompanyName());
+//                    intent.putExtra("COMPANY_VERIFIED", mValues[position - 1].isCompanyVerified());
+//                    intent.putExtra("COMPANY_LOCATION", mValues[position - 1].getOfferLocation());
+//                    intent.putExtra("COMPANY_PHONE_NUMBER", mValues[position - 1].getPhoneNumber());
+//                    intent.putExtra("OFFER_END_TYPE", mValues[position - 1].getOfferEndType());
+//                    intent.putExtra("COMPANY_ID", mValues[position - 1].getCompanyId());
+//                    intent.putExtra("COMPANY_TAG_ID", mValues[position - 1].getCompanyTagId());
+//                    intent.putExtra("COMPANY_PROFILE_PHOTO", mValues[position - 1].getCompany().getCompanyProfilePhoto());
+//                    intent.putExtra("OFFER_TIME_END", mValues[position - 1].getOfferTimeEnd());
+//                    mContext.startActivity(intent);
+//                }
+//            }
+//        });
 
         if (mValues[position - 1].isCompanyVerified()) {
             searchViewHolder.iv_raw_company_verified.setVisibility(View.VISIBLE);
@@ -536,6 +553,8 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
         AutoLinkTextView txt_add_title;
         SimpleDraweeView sdv_cateogory;
         SimpleDraweeView sdv_add_iamge;
+        HeightWrappingViewPager view_pager;
+        CircleIndicator indicator;
 //        TextView txt_date;
         TextView txt_days;
         TextView txt_hrs;
@@ -604,7 +623,9 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
             txt_minut = view.findViewById(R.id.txt_minut);
             sdvImage = view.findViewById(R.id.sdvImage);
             sdv_cateogory = view.findViewById(R.id.sdv_cateogory);
-            sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
+//            sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
+            view_pager = view.findViewById(R.id.view_pager);
+            indicator = view.findViewById(R.id.indicator);
 
 
             ll_raw_offers_rating_bar = view.findViewById(R.id.ll_timeline_rating);

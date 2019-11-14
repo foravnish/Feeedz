@@ -143,16 +143,45 @@
         android:layout_below="@+id/main_rl"
         android:layout_marginTop="@dimen/margin_10dp">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <LinearLayout
             android:id="@+id/sdv_add_iamge"
-            android:layout_marginTop="@dimen/margin_8dp"
-            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            fresco:placeholderImage="@drawable/placeholder"
-            fresco:placeholderImageScaleType="centerCrop"
-            fresco:roundedCornerRadius="0dp" />
+            android:orientation="vertical">
+
+            <com.socialinfotech.feeedj.AppUtils.HeightWrappingViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <!--            android:paddingLeft="@dimen/margin_15dp"-->
+            <!--            android:paddingRight="@dimen/margin_15dp"-->
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                app:ci_drawable="@drawable/circleindicator_round"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_gravity="bottom|center"/>
+
+        </LinearLayout>
+
+
+        <!--        <com.facebook.drawee.view.SimpleDraweeView-->
+<!--            android:id="@+id/sdv_add_iamge"-->
+<!--            android:layout_marginTop="@dimen/margin_8dp"-->
+<!--            android:clickable="true"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            fresco:placeholderImage="@drawable/placeholder"-->
+<!--            fresco:placeholderImageScaleType="centerCrop"-->
+<!--            fresco:roundedCornerRadius="0dp" />-->
 
 
 <!--        android:paddingLeft="@dimen/margin_15dp"-->

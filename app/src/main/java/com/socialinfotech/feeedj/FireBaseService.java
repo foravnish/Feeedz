@@ -24,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.Map;
+
 
 public class FireBaseService extends FirebaseMessagingService {
 
@@ -55,12 +57,26 @@ public class FireBaseService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        Log.e("messageReceived", "" + remoteMessage.getData());
+        Log.d("messageReceived", "" + remoteMessage.getData());
 
         ctx = this;
         String CompanyId="";
 
-        Log.e("messageData", "" + remoteMessage.getData().get("message"));
+        if (remoteMessage.getData() != null) {
+            try {
+                Map<String, String> params = remoteMessage.getData();
+                JSONObject object = new JSONObject(params);
+                Log.d("JSONOBJECT", object.toString());
+                CompanyId = object.get("Company").toString();
+                notify("",CompanyId);
+                //rest of the code
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Log.d("messageData", "" + remoteMessage.getData().get("message"));
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
@@ -70,9 +86,7 @@ public class FireBaseService extends FirebaseMessagingService {
             JSONObject json2 = json.getJSONObject("data");
             String message = json2.get("message").toString();
             String search = json2.get("search").toString();
-            if (json2.has("Company")){
-                CompanyId = json2.get("Company").toString();
-            }
+
 
 
 //        String nhMessage = bundle.getString("message");
@@ -89,7 +103,7 @@ public class FireBaseService extends FirebaseMessagingService {
             searchNotification = false;
             searchTerm = "";
         }
-            notify(message,CompanyId);
+        notify(message,CompanyId);
         } catch (JSONException e) {
             e.printStackTrace();
         }

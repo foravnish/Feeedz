@@ -25,11 +25,15 @@ public class PagerDetail extends PagerAdapter {
     List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans;
     Context context;
     LayoutInflater mLayoutInflater;
+    String img;
+    Boolean flag;
 
-    public PagerDetail(List<GetCompnayDetailResponse> views, Context context, List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans) {
+    public PagerDetail(List<GetCompnayDetailResponse> views, Context context, List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans,String img,Boolean flag) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
+        this.img=img;
+        this.flag=flag;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -55,13 +59,23 @@ public class PagerDetail extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.image_pager_item, container, false);
 
         final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
-        imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
 
+        if (flag) {
+            imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
+        }else{
+            imageView.setImageURI(Uri.parse(img));
+        }
 
         if (imagesBeans.get(position ).getCoord() != null) {
             String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
-            if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) < 700) {
+            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=700) {
+                imageView.setAspectRatio(1);
+            }
+            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) < 700) {
                 imageView.setAspectRatio((float)1.3);
+            }
+            else if (Integer.parseInt(sImageDimensions[0]) == Integer.parseInt(sImageDimensions[1])) {
+                imageView.setAspectRatio(1);
             }
             else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
                 imageView.setAspectRatio((float)1.8);
@@ -80,21 +94,41 @@ public class PagerDetail extends PagerAdapter {
                 Log.e("co-ords", "" + imagesBeans.get(position).getCoord());
 //                String str = views.get(position ).getAttachmentHTML();
 //                if (str == null) {
-                Intent intent = new Intent(context, ImageViewActivity.class);
-                intent.putExtra(Constant.ImageNAme, imagesBeans.get(position).getImage());
+
+                if (flag) {
+                    Intent intent = new Intent(context, ImageViewActivity.class);
+                    intent.putExtra(Constant.ImageNAme, imagesBeans.get(position).getImage());
 //                intent.putExtra(Constant.TextTile, views.get(position ).getOfferTitle());
 //                intent.putExtra(Constant.OfferLocation, views.get(position ).getOfferLocation());
-               // intent.putExtra(Constant.PhoneNumber, views.get(position ).getPhoneNumber());
+                    // intent.putExtra(Constant.PhoneNumber, views.get(position ).getPhoneNumber());
 //                intent.putExtra(Constant.OfferID, views.get(position ).getOfferId());
 //                intent.putExtra(Constant.OFFER_RATING_STATUS, views.get(position ).getOfferRating());
-                int[] screenLocation = new int[2];
-                imageView.getLocationOnScreen(screenLocation);
+                    int[] screenLocation = new int[2];
+                    imageView.getLocationOnScreen(screenLocation);
 
-                intent.putExtra("left", screenLocation[0]).
-                        putExtra("top", screenLocation[1]).
-                        putExtra("width", imageView.getWidth()).
-                        putExtra("height", imageView.getHeight());
-                context.startActivity(intent);
+                    intent.putExtra("left", screenLocation[0]).
+                            putExtra("top", screenLocation[1]).
+                            putExtra("width", imageView.getWidth()).
+                            putExtra("height", imageView.getHeight());
+                    context.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(context, ImageViewActivity.class);
+                    intent.putExtra(Constant.ImageNAme, img);
+//                intent.putExtra(Constant.TextTile, views.get(position ).getOfferTitle());
+//                intent.putExtra(Constant.OfferLocation, views.get(position ).getOfferLocation());
+                    // intent.putExtra(Constant.PhoneNumber, views.get(position ).getPhoneNumber());
+//                intent.putExtra(Constant.OfferID, views.get(position ).getOfferId());
+//                intent.putExtra(Constant.OFFER_RATING_STATUS, views.get(position ).getOfferRating());
+                    int[] screenLocation = new int[2];
+                    imageView.getLocationOnScreen(screenLocation);
+
+                    intent.putExtra("left", screenLocation[0]).
+                            putExtra("top", screenLocation[1]).
+                            putExtra("width", imageView.getWidth()).
+                            putExtra("height", imageView.getHeight());
+                    context.startActivity(intent);
+                }
+
 
 //                } else {
 //                    Intent intent = new Intent(context, PDFViewActivity.class);

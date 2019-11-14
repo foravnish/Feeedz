@@ -44,6 +44,7 @@ public class GetCompnayDetailResponse {
     private boolean IsFollowed;
     private boolean Notifications;
     private String PhoneNumber;
+    private boolean IsMultiple;
     private int NumberOfOffers;
     private int ObjectState;
     /**
@@ -223,6 +224,13 @@ public class GetCompnayDetailResponse {
         this.NumberOfOffers = NumberOfOffers;
     }
 
+    public void setMultiple(Boolean multiple) {
+        IsMultiple = multiple;
+    }
+
+    public Boolean getMultiple() {
+        return IsMultiple;
+    }
     public int getObjectState() {
         return ObjectState;
     }
@@ -296,6 +304,7 @@ public class GetCompnayDetailResponse {
         private int CompanyTagId;
         private String OfferEndType;
         private String OfferLocation;
+        private boolean IsMultiple;
         private List<OffersImagesBeansDetails> OfferImages;
         /**
          * CompanyTagImage : http://feeedz.co/upload/car@2x.png
@@ -466,6 +475,8 @@ public class GetCompnayDetailResponse {
         public void setOfferConditions(String OfferConditions) {
             this.OfferConditions = OfferConditions;
         }
+
+
 
         public String getOfferLocation() {
             return OfferLocation;

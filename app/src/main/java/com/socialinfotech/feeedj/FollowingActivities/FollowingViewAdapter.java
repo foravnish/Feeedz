@@ -33,7 +33,6 @@ import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ExploreActivities.CategoryTabActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
 import com.socialinfotech.feeedj.R;
-import com.socialinfotech.feeedj.TimeLineActivities.Pager;
 import com.socialinfotech.feeedj.TimeLineActivities.ViewCompanyDetailsActivity;
 
 import java.text.ParseException;

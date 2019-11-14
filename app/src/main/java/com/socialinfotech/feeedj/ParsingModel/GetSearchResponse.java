@@ -48,7 +48,8 @@ public class GetSearchResponse {
     private Object CompanyTag;
     private String OfferDescription;
     private int CompanyId;
-
+    private boolean IsMultiple;
+    private List<OffersImagesBeansCat> OfferImages;
 
     /**
      * CompanyId : 48
@@ -294,6 +295,45 @@ public class GetSearchResponse {
         this.OfferRatings = OfferRatings;
     }
 
+
+    public void setMultiple(Boolean multiple) {
+        IsMultiple = multiple;
+    }
+
+    public Boolean getMultiple() {
+        return IsMultiple;
+    }
+
+
+     public class OffersImagesBeansCat {
+        private String image;
+        private String coord;
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getCoord() {
+            return coord;
+        }
+
+        public void setCoord(String coord) {
+            this.coord = coord;
+        }
+    }
+
+    public List<OffersImagesBeansCat> getOfferImages() {
+        return OfferImages;
+    }
+
+    public void setOfferImages(List<OffersImagesBeansCat> offerImages) {
+        OfferImages = offerImages;
+    }
+
     public static class CompanyBean {
         private int CompanyId;
         private boolean Featured;
@@ -533,7 +573,7 @@ public class GetSearchResponse {
             private Object CompanyTag;
             private String OfferDescription;
             private int CompanyId;
-            private List<OffersImagesBeansFeeds> OfferImages;
+
             /**
              * CompanyId : 16
              * Featured : true
@@ -913,14 +953,9 @@ public class GetSearchResponse {
             }
 
 
-            public List<OffersImagesBeansFeeds> getOfferImages() {
-                return OfferImages;
-            }
-
-            public void setOfferImages(List<OffersImagesBeansFeeds> offerImages) {
-                OfferImages = offerImages;
-            }
         }
+
+
     }
 
 

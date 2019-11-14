@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.Lg;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -31,6 +32,8 @@ public abstract class BaseFregment extends Fragment {
         }
         sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+
+
         Interceptor interceptor = chain -> {
             Request original = chain.request();
             Request.Builder requestBuilder = original.newBuilder();
@@ -42,6 +45,9 @@ public abstract class BaseFregment extends Fragment {
             Request request = requestBuilder.build();
             return chain.proceed(request);
         };
+
+
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .build();

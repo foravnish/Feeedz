@@ -25,22 +25,25 @@ import com.luseen.autolinklibrary.AutoLinkMode;
 import com.luseen.autolinklibrary.AutoLinkOnClickListener;
 import com.luseen.autolinklibrary.AutoLinkTextView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.HeightWrappingViewPager;
 import com.socialinfotech.feeedj.AppUtils.TextViewPlus;
 import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.Home;
-import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
-import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetSearchResponse;
 import com.socialinfotech.feeedj.R;
+import com.socialinfotech.feeedj.TimeLineActivities.PagerCategory;
 import com.socialinfotech.feeedj.TimeLineActivities.ViewCompanyDetailsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 
 public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapter<CategoriesFeedSearchRecyclerViewAdapter.ViewHolder> {
@@ -52,6 +55,8 @@ public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapte
     Context mContext;
     SharedPreferences sPref;
     SharedPreferences.Editor editor;
+    PagerCategory pagerAdapter;
+
     private Runnable updateRemainingTimeRunnable = new Runnable() {
         @Override
         public void run() {
@@ -130,14 +135,25 @@ public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapte
         holder.txt_add_title.setTypeface(typeface_txt_add_title);
 
         holder.sdvImage.setImageURI(Uri.parse(mValues[position].getCompany().getCompanyProfilePhoto()));
-        holder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position].getOfferImage()));
+       // holder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position].getOfferImage()));
+
+        pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage());
+        holder.view_pager.setAdapter(pagerAdapter);
+        //headerHolder.view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        if (mValues[position].getMultiple()) {
+            holder.indicator.setVisibility(View.VISIBLE);
+            holder.indicator.setViewPager(holder.view_pager);
+        }
+        else{
+            holder.indicator.setVisibility(View.GONE);
+        }
 
         if (mValues[position].getOfferImageCoord() != null) {
             String[] sImageDimensions = mValues[position].getOfferImageCoord().split("x");
             if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-                holder.sdv_add_iamge.setAspectRatio(1);
+              //  holder.sdv_add_iamge.setAspectRatio(1);
             } else {
-                holder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
+             //   holder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
             }
         }
 
@@ -147,52 +163,52 @@ public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapte
         }
         holder.updateTimeRemaining(System.currentTimeMillis());
         holder.sdv_cateogory.setImageURI(setCopmnyImage(mValues[position].getCompanyTagId()));
-        holder.sdv_add_iamge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ImageViewActivity.class);
-//                intent.putExtra(Constant.ImageNAme,mValues[position].getOfferImage());
-//                intent.putExtra(Constant.TextTile,mValues[position].getOfferTitle());
-//                mContext.startActivity(intent);
-                String str = mValues[position].getAttachmentHTML();
-                if (str==null) {
-                    Intent intent = new Intent(mContext, ImageViewActivity.class);
-                    intent.putExtra(Constant.ImageNAme, mValues[position].getOfferImage());
-                    intent.putExtra(Constant.TextTile, mValues[position].getOfferTitle());
-                    intent.putExtra(Constant.OfferLocation, mValues[position].getOfferLocation());
-                    intent.putExtra(Constant.PhoneNumber, mValues[position].getPhoneNumber());
-                    intent.putExtra(Constant.OfferID, mValues[position].getOfferId());
-                    intent.putExtra(Constant.OFFER_RATING_STATUS, mValues[position].getOfferRating());
-
-                    int[] screenLocation = new int[2];
-                    holder.sdv_add_iamge.getLocationOnScreen(screenLocation);
-
-                    intent.putExtra("left", screenLocation[0]).
-                            putExtra("top", screenLocation[1]).
-                            putExtra("width", holder.sdv_add_iamge.getWidth()).
-                            putExtra("height", holder.sdv_add_iamge.getHeight());
-                    mContext.startActivity(intent);
-
-                }else {
-                    Intent intent = new Intent(mContext, PDFViewActivity.class);
-                    intent.putExtra("OFFER_ID", mValues[position].getOfferId());
-                    intent.putExtra("OFFER_IMAGE", mValues[position].getOfferImage());
-                    intent.putExtra("BROCHURE_PDF_URL", mValues[position].getAttachmentHTML());
-                    intent.putExtra("BROCHURE_PDF_TITLE", mValues[position].getCompany().getCompanyName_Ar());
-                    intent.putExtra("COMPANY_NAME", mValues[position].getCompany().getCompanyName_Ar());
-                    intent.putExtra("COMPANY_USER_NAME", mValues[position].getCompany().getCompanyName());
-                    intent.putExtra("COMPANY_VERIFIED", mValues[position].isCompanyVerified());
-                    intent.putExtra("COMPANY_LOCATION", mValues[position].getOfferLocation());
-                    intent.putExtra("COMPANY_PHONE_NUMBER", mValues[position].getPhoneNumber());
-                    intent.putExtra("OFFER_END_TYPE", mValues[position].getOfferEndType());
-                    intent.putExtra("COMPANY_ID", mValues[position].getCompanyId());
-                    intent.putExtra("COMPANY_TAG_ID", mValues[position].getCompanyTagId());
-                    intent.putExtra("COMPANY_PROFILE_PHOTO", mValues[position].getCompany().getCompanyProfilePhoto());
-                    intent.putExtra("OFFER_TIME_END", mValues[position].getOfferTimeEnd());
-                    mContext.startActivity(intent);
-                }
-            }
-        });
+//        holder.sdv_add_iamge.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(mContext, ImageViewActivity.class);
+////                intent.putExtra(Constant.ImageNAme,mValues[position].getOfferImage());
+////                intent.putExtra(Constant.TextTile,mValues[position].getOfferTitle());
+////                mContext.startActivity(intent);
+//                String str = mValues[position].getAttachmentHTML();
+//                if (str==null) {
+//                    Intent intent = new Intent(mContext, ImageViewActivity.class);
+//                    intent.putExtra(Constant.ImageNAme, mValues[position].getOfferImage());
+//                    intent.putExtra(Constant.TextTile, mValues[position].getOfferTitle());
+//                    intent.putExtra(Constant.OfferLocation, mValues[position].getOfferLocation());
+//                    intent.putExtra(Constant.PhoneNumber, mValues[position].getPhoneNumber());
+//                    intent.putExtra(Constant.OfferID, mValues[position].getOfferId());
+//                    intent.putExtra(Constant.OFFER_RATING_STATUS, mValues[position].getOfferRating());
+//
+//                    int[] screenLocation = new int[2];
+//                    holder.sdv_add_iamge.getLocationOnScreen(screenLocation);
+//
+//                    intent.putExtra("left", screenLocation[0]).
+//                            putExtra("top", screenLocation[1]).
+//                            putExtra("width", holder.sdv_add_iamge.getWidth()).
+//                            putExtra("height", holder.sdv_add_iamge.getHeight());
+//                    mContext.startActivity(intent);
+//
+//                }else {
+//                    Intent intent = new Intent(mContext, PDFViewActivity.class);
+//                    intent.putExtra("OFFER_ID", mValues[position].getOfferId());
+//                    intent.putExtra("OFFER_IMAGE", mValues[position].getOfferImage());
+//                    intent.putExtra("BROCHURE_PDF_URL", mValues[position].getAttachmentHTML());
+//                    intent.putExtra("BROCHURE_PDF_TITLE", mValues[position].getCompany().getCompanyName_Ar());
+//                    intent.putExtra("COMPANY_NAME", mValues[position].getCompany().getCompanyName_Ar());
+//                    intent.putExtra("COMPANY_USER_NAME", mValues[position].getCompany().getCompanyName());
+//                    intent.putExtra("COMPANY_VERIFIED", mValues[position].isCompanyVerified());
+//                    intent.putExtra("COMPANY_LOCATION", mValues[position].getOfferLocation());
+//                    intent.putExtra("COMPANY_PHONE_NUMBER", mValues[position].getPhoneNumber());
+//                    intent.putExtra("OFFER_END_TYPE", mValues[position].getOfferEndType());
+//                    intent.putExtra("COMPANY_ID", mValues[position].getCompanyId());
+//                    intent.putExtra("COMPANY_TAG_ID", mValues[position].getCompanyTagId());
+//                    intent.putExtra("COMPANY_PROFILE_PHOTO", mValues[position].getCompany().getCompanyProfilePhoto());
+//                    intent.putExtra("OFFER_TIME_END", mValues[position].getOfferTimeEnd());
+//                    mContext.startActivity(intent);
+//                }
+//            }
+//        });
 
         if (mValues[position].isCompanyVerified()) {
             holder.iv_raw_company_verified.setVisibility(View.VISIBLE);
@@ -509,6 +525,8 @@ public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapte
         AutoLinkTextView txt_add_title;
         SimpleDraweeView sdv_cateogory;
         SimpleDraweeView sdv_add_iamge;
+        HeightWrappingViewPager view_pager;
+        CircleIndicator indicator;
         //        TextView txt_date;
         TextView txt_days;
         TextView txt_hrs;
@@ -578,8 +596,9 @@ public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapte
             txt_minut = view.findViewById(R.id.txt_minut);
             sdvImage = view.findViewById(R.id.sdvImage);
             sdv_cateogory = view.findViewById(R.id.sdv_cateogory);
-            sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
-
+//            sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
+            view_pager = view.findViewById(R.id.view_pager);
+            indicator = view.findViewById(R.id.indicator);
 
             ll_raw_offers_rating_bar = view.findViewById(R.id.ll_timeline_rating);
             rBarRawOffersRating = view.findViewById(R.id.r_bar_timline_rating);

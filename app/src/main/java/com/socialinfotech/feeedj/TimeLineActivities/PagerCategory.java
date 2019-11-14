@@ -3,13 +3,9 @@ package com.socialinfotech.feeedj.TimeLineActivities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Point;
 import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +14,21 @@ import android.widget.LinearLayout;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
 import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
-import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
+import com.socialinfotech.feeedj.ParsingModel.GetSearchResponse;
 import com.socialinfotech.feeedj.R;
 
 import java.util.List;
 
-public class Pager extends PagerAdapter {
+public class PagerCategory extends PagerAdapter {
 
-    List<GetAllOffersResponse> views;
-    List<GetAllOffersResponse.OffersImagesBeans> imagesBeans;
-    Activity context;
+    List<GetSearchResponse> views;
+    List<GetSearchResponse.OffersImagesBeansCat> imagesBeans;
+    Context context;
     String img;
     LayoutInflater mLayoutInflater;
 
-    public Pager(List<GetAllOffersResponse> views, Activity context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans, String img) {
+    public PagerCategory(List<GetSearchResponse> views, Context context, List<GetSearchResponse.OffersImagesBeansCat> imagesBeans, String img) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
@@ -64,12 +60,6 @@ public class Pager extends PagerAdapter {
         final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
 
 
-//        Display display = context.getWindowManager().getDefaultDisplay();
-//        Point size = new Point();
-//        display.getSize(size);
-//        int screenWidth = size.x;
-//        int screenHeight = size.y;
-
         if (views.get(position ).getMultiple()) {
             imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
         }else{
@@ -87,8 +77,8 @@ public class Pager extends PagerAdapter {
             else if (Integer.parseInt(sImageDimensions[1]) ==699) {
                 imageView.setAspectRatio(1);
             }
-           else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
-               imageView.setAspectRatio((float)1.8);
+            else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
+                imageView.setAspectRatio((float)1.8);
             }else {
                 imageView.setAspectRatio(1);
             }
@@ -173,3 +163,4 @@ public class Pager extends PagerAdapter {
 
 
 }
+
