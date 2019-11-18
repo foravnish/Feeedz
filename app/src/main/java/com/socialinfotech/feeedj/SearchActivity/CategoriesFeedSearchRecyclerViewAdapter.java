@@ -137,7 +137,12 @@ public class CategoriesFeedSearchRecyclerViewAdapter extends RecyclerView.Adapte
         holder.sdvImage.setImageURI(Uri.parse(mValues[position].getCompany().getCompanyProfilePhoto()));
        // holder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position].getOfferImage()));
 
-        pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany());
+        if (mValues[position].getMultiple()) {
+            pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany(),true,mValues[position].getOfferImageCoord());
+        }else{
+            pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany(),false,mValues[position].getOfferImageCoord());
+        }
+
         holder.view_pager.setAdapter(pagerAdapter);
         //headerHolder.view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         if (mValues[position].getMultiple()) {

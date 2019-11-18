@@ -85,7 +85,7 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     };
 
     public CompnayDetailAdapter(GetCompnayDetailResponse getCompnayDetailResponse, ViewCompanyDetailsActivity viewCompanyDetailsActivity) {
-    mValues = getCompnayDetailResponse;
+        mValues = getCompnayDetailResponse;
         mContext = viewCompanyDetailsActivity;
         lstHolders = new ArrayList<>();
         sPref = PreferenceManager.getDefaultSharedPreferences(viewCompanyDetailsActivity);
@@ -106,9 +106,9 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //        if (viewType == TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.raw_company_detail_items, parent, false);
-            return new VHItem(view);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.raw_company_detail_items, parent, false);
+        return new VHItem(view);
 //        }
 //        else if (viewType == TYPE_HEADER) {
 //            View view1 = LayoutInflater.from(parent.getContext())
@@ -121,33 +121,37 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 //        if (holder instanceof VHItem) {
-            ((VHItem) holder).mItem = mValues.getOffers().get(position);
+        ((VHItem) holder).mItem = mValues.getOffers().get(position);
 
-            ((VHItem) holder).txt_add_title.setHashtagModeColor(mContext.getResources().getColor(R.color.colorMidPurple));
-            ((VHItem) holder).txt_add_title.setUrlModeColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
-            ((VHItem) holder).txt_add_title.addAutoLinkMode(AutoLinkMode.MODE_HASHTAG, AutoLinkMode.MODE_URL);
-            ((VHItem) holder).txt_add_title.setAutoLinkText(mValues.getOffers().get(position).getOfferTitle());
+        ((VHItem) holder).txt_add_title.setHashtagModeColor(mContext.getResources().getColor(R.color.colorMidPurple));
+        ((VHItem) holder).txt_add_title.setUrlModeColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+        ((VHItem) holder).txt_add_title.addAutoLinkMode(AutoLinkMode.MODE_HASHTAG, AutoLinkMode.MODE_URL);
+        ((VHItem) holder).txt_add_title.setAutoLinkText(mValues.getOffers().get(position).getOfferTitle());
 
-            ((VHItem) holder).txt_add_title.setAutoLinkOnClickListener(new AutoLinkOnClickListener() {
-                @Override
-                public void onAutoLinkTextClick(AutoLinkMode autoLinkMode, String matchedText) {
-                    if (autoLinkMode.equals(AutoLinkMode.MODE_HASHTAG)) {
-                        Utility.search(mContext, matchedText.trim());
-                    } else if (autoLinkMode.equals(AutoLinkMode.MODE_URL)) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(matchedText.trim()));
-                        mContext.startActivity(browserIntent);
-                    }
+        ((VHItem) holder).txt_add_title.setAutoLinkOnClickListener(new AutoLinkOnClickListener() {
+            @Override
+            public void onAutoLinkTextClick(AutoLinkMode autoLinkMode, String matchedText) {
+                if (autoLinkMode.equals(AutoLinkMode.MODE_HASHTAG)) {
+                    Utility.search(mContext, matchedText.trim());
+                } else if (autoLinkMode.equals(AutoLinkMode.MODE_URL)) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(matchedText.trim()));
+                    mContext.startActivity(browserIntent);
                 }
-            });
+            }
+        });
 //
 //            ((VHItem) holder).txt_add_title.setUrlModeColor(ContextCompat.getColor(mContext, R.color.facebook_messenger_blue));
 
-            Typeface typeface_txt_add_title = Typeface.createFromAsset(mContext.getAssets(), "demibold.ttf");
-            ((VHItem) holder).txt_add_title.setTypeface(typeface_txt_add_title);
+        Typeface typeface_txt_add_title = Typeface.createFromAsset(mContext.getAssets(), "demibold.ttf");
+        ((VHItem) holder).txt_add_title.setTypeface(typeface_txt_add_title);
 
 //            ((VHItem) holder).sdv_add_iamge.setImageURI(Uri.parse(mValues.getOffers().get(position).getOfferImage()));
+        if (mValues.getOffers().get(position).getMultiple()) {
+            pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages(),mValues.getOffers().get(position).getOfferImage(),true,mValues.getOffers().get(position).getAttachmentHTML(),mValues.getCompanyName(),mValues.getCompanyName_Ar(),mValues.getCompanyProfilePhoto(),mValues.getOffers().get(position).getOfferLocation(),mValues.getPhoneNumber(),mValues.getOffers().get(position).getOfferTimeEnd(),mValues.getOffers().get(position).getOfferEndType(),mValues.getOffers().get(position).getCompanyId(),mValues.getOffers().get(position).getCompanyTagId());
+        }else{
+            pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages(),mValues.getOffers().get(position).getOfferImage(),false,mValues.getOffers().get(position).getAttachmentHTML(),mValues.getCompanyName(),mValues.getCompanyName_Ar(),mValues.getCompanyProfilePhoto(),mValues.getOffers().get(position).getOfferLocation(),mValues.getPhoneNumber(),mValues.getOffers().get(position).getOfferTimeEnd(),mValues.getOffers().get(position).getOfferEndType(),mValues.getOffers().get(position).getCompanyId(),mValues.getOffers().get(position).getCompanyTagId());
+        }
 
-        pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages(),mValues.getOffers().get(position).getOfferImage(),mValues.getMultiple(),mValues.getOffers().get(position).getAttachmentHTML());
         ((VHItem) holder).view_pager.setAdapter(pagerAdapter);
         ((VHItem) holder).view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -160,65 +164,65 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
 
         if (mValues.getOffers().get(position).getOfferImageCoord() != null) {
-                String[] sImageDimensions = mValues.getOffers().get(position).getOfferImageCoord().split("x");
-                if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-                  //  ((VHItem) holder).sdv_add_iamge.setAspectRatio(1);
-                } else {
-                   // ((VHItem) holder).sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
-                }
-            }
-
-            ((VHItem) holder).sdvImage.setImageURI(Uri.parse(mValues.getCompanyProfilePhoto()));
-            ((VHItem) holder).sdv_cateogory.setImageURI(setCopmnyImage(mValues.getOffers().get(position).getCompanyTagId()));
-            ((VHItem) holder).sdv_cateogory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, CategoryTabActivity.class);
-                    intent.putExtra("message", mValues.getCompanyTags().get(0).getTagId());
-                    intent.putExtra("title", Utility.getCategoryTitleByID(mValues.getOffers().get(position).getCompanyTagId()));
-                    mContext.startActivity(intent);
-                }
-            });
-
-            int featureType = mValues.getOffers().get(position).getFeatureType();
-            boolean isFeatured = mValues.getOffers().get(position).isFeatured();
-
-            if (featureType > 1 || isFeatured) {
-                if (featureType == 3) {
-                    ((VHItem) holder).img_sponser.setVisibility(View.GONE);
-                    ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.GONE);
-                } else if (featureType == 4) {
-                    ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.VISIBLE);
-                    ((VHItem) holder).img_sponser.setVisibility(View.GONE);
-                } else if (featureType == 2 || isFeatured) {
-                    ((VHItem) holder).img_sponser.setVisibility(View.VISIBLE);
-                    ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.GONE);
-                }
+            String[] sImageDimensions = mValues.getOffers().get(position).getOfferImageCoord().split("x");
+            if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
+                //  ((VHItem) holder).sdv_add_iamge.setAspectRatio(1);
             } else {
+                // ((VHItem) holder).sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
+            }
+        }
+
+        ((VHItem) holder).sdvImage.setImageURI(Uri.parse(mValues.getCompanyProfilePhoto()));
+        ((VHItem) holder).sdv_cateogory.setImageURI(setCopmnyImage(mValues.getOffers().get(position).getCompanyTagId()));
+        ((VHItem) holder).sdv_cateogory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CategoryTabActivity.class);
+                intent.putExtra("message", mValues.getCompanyTags().get(0).getTagId());
+                intent.putExtra("title", Utility.getCategoryTitleByID(mValues.getOffers().get(position).getCompanyTagId()));
+                mContext.startActivity(intent);
+            }
+        });
+
+        int featureType = mValues.getOffers().get(position).getFeatureType();
+        boolean isFeatured = mValues.getOffers().get(position).isFeatured();
+
+        if (featureType > 1 || isFeatured) {
+            if (featureType == 3) {
                 ((VHItem) holder).img_sponser.setVisibility(View.GONE);
                 ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.GONE);
+            } else if (featureType == 4) {
+                ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.VISIBLE);
+                ((VHItem) holder).img_sponser.setVisibility(View.GONE);
+            } else if (featureType == 2 || isFeatured) {
+                ((VHItem) holder).img_sponser.setVisibility(View.VISIBLE);
+                ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.GONE);
             }
+        } else {
+            ((VHItem) holder).img_sponser.setVisibility(View.GONE);
+            ((VHItem) holder).iv_raw_offers_brochure.setVisibility(View.GONE);
+        }
 
-            String offerEndType = mValues.getOffers().get(position).getOfferEndType().trim();
+        String offerEndType = mValues.getOffers().get(position).getOfferEndType().trim();
 
-            if (offerEndType.equalsIgnoreCase("Timer")) {
-                ((VHItem) holder).llRawOffersTimer.setVisibility(View.VISIBLE);
-                ((VHItem) holder).llRawOffersEndType.setVisibility(View.GONE);
-            } else {
-                ((VHItem) holder).llRawOffersTimer.setVisibility(View.GONE);
-                ((VHItem) holder).llRawOffersEndType.setVisibility(View.VISIBLE);
+        if (offerEndType.equalsIgnoreCase("Timer")) {
+            ((VHItem) holder).llRawOffersTimer.setVisibility(View.VISIBLE);
+            ((VHItem) holder).llRawOffersEndType.setVisibility(View.GONE);
+        } else {
+            ((VHItem) holder).llRawOffersTimer.setVisibility(View.GONE);
+            ((VHItem) holder).llRawOffersEndType.setVisibility(View.VISIBLE);
 
-                if (offerEndType.equalsIgnoreCase("LimitedQuantity")) {
-                    ((VHItem) holder).tvRawOffersEndType.setText("العرض متوفر حتى انتهاء الكمية");
-                } else if (offerEndType.equalsIgnoreCase("LimitedTime")) {
-                    ((VHItem) holder).tvRawOffersEndType.setText("العرض متوفر لمدة محدودة");
-                }
+            if (offerEndType.equalsIgnoreCase("LimitedQuantity")) {
+                ((VHItem) holder).tvRawOffersEndType.setText("العرض متوفر حتى انتهاء الكمية");
+            } else if (offerEndType.equalsIgnoreCase("LimitedTime")) {
+                ((VHItem) holder).tvRawOffersEndType.setText("العرض متوفر لمدة محدودة");
             }
+        }
 
-            synchronized (lstHolders) {
-                lstHolders.add((VHItem) holder);
-            }
-            ((VHItem) holder).updateTimeRemaining(System.currentTimeMillis());
+        synchronized (lstHolders) {
+            lstHolders.add((VHItem) holder);
+        }
+        ((VHItem) holder).updateTimeRemaining(System.currentTimeMillis());
 //            ((VHItem) holder).sdv_add_iamge.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
@@ -286,106 +290,106 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
 //                }
 //            });
 
-                int ratingFromApi = mValues.getOffers().get(position).getOfferRating();
-                Log.e("rating", "" + ratingFromApi);
-                ((VHItem) holder).rBarRawOffersRating.setRating(ratingFromApi);
-                if (ratingFromApi > 0) {
-                    ((VHItem) holder).ivRawOffersRate.setImageResource(R.mipmap.ic_rated_timeline);
-                } else {
-                    ((VHItem) holder).ivRawOffersRate.setImageResource(R.mipmap.ic_timeline_feed_rate);
-                }
+        int ratingFromApi = mValues.getOffers().get(position).getOfferRating();
+        Log.e("rating", "" + ratingFromApi);
+        ((VHItem) holder).rBarRawOffersRating.setRating(ratingFromApi);
+        if (ratingFromApi > 0) {
+            ((VHItem) holder).ivRawOffersRate.setImageResource(R.mipmap.ic_rated_timeline);
+        } else {
+            ((VHItem) holder).ivRawOffersRate.setImageResource(R.mipmap.ic_timeline_feed_rate);
+        }
 
-            ((VHItem) holder).rBarRawOffersRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                    final int ratingValue = Math.round(v);
-                    if (ratingValue > 0 && b) {
-                        ratingBar.setRating(ratingValue);
-                        ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.GONE);
-                        isRatingLayoutVisible = false;
-                        if (sPref.getString(Constant.ACCESS_TOKEN, "").equals("")) {
-                            Utility.WarningDialog(mContext);
-                            ((VHItem) holder).rBarRawOffersRating.setRating(0);
-                        } else {
-                            mValues.getOffers().get(position).setOfferRating(ratingValue);
-                            ((VHItem) holder).ivRawOffersRate.setImageResource(R.mipmap.ic_rated_timeline);
+        ((VHItem) holder).rBarRawOffersRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                final int ratingValue = Math.round(v);
+                if (ratingValue > 0 && b) {
+                    ratingBar.setRating(ratingValue);
+                    ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.GONE);
+                    isRatingLayoutVisible = false;
+                    if (sPref.getString(Constant.ACCESS_TOKEN, "").equals("")) {
+                        Utility.WarningDialog(mContext);
+                        ((VHItem) holder).rBarRawOffersRating.setRating(0);
+                    } else {
+                        mValues.getOffers().get(position).setOfferRating(ratingValue);
+                        ((VHItem) holder).ivRawOffersRate.setImageResource(R.mipmap.ic_rated_timeline);
 
-                            Home.reportOfferLikes(mValues.getOffers().get(position).getOfferId(), ratingValue);
+                        Home.reportOfferLikes(mValues.getOffers().get(position).getOfferId(), ratingValue);
 //                            new OfferRatingTask(new String[]{String.valueOf(feedInFocusID), String.valueOf(ratingValue), sPref.getString(Constant.ACCESS_TOKEN, "")}).execute();
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (ratingValue < 3) {
-                                            Utility.ShowDislikeDialog(mContext);
-                                    } else {
-                                        if (sPref.getBoolean(Constant.LIKE_DIALOG, true)) {
-                                            Utility.ShowlikeDialog(mContext);
-                                            sPref.edit().putBoolean(Constant.LIKE_DIALOG, false).apply();
-                                        }
-
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (ratingValue < 3) {
+                                    Utility.ShowDislikeDialog(mContext);
+                                } else {
+                                    if (sPref.getBoolean(Constant.LIKE_DIALOG, true)) {
+                                        Utility.ShowlikeDialog(mContext);
+                                        sPref.edit().putBoolean(Constant.LIKE_DIALOG, false).apply();
                                     }
+
                                 }
-                            }, 250);
-                        }
+                            }
+                        }, 250);
                     }
                 }
-            });
-
-            if (isRatingLayoutVisible) {
-                ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.GONE);
-                isRatingLayoutVisible = false;
             }
+        });
 
-            ((VHItem) holder).ll_raw_offers_rate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!isRatingLayoutVisible) {
-                        ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.VISIBLE);
-                        isRatingLayoutVisible = true;
-                    } else {
-                        ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.GONE);
-                        isRatingLayoutVisible = false;
-                    }
+        if (isRatingLayoutVisible) {
+            ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.GONE);
+            isRatingLayoutVisible = false;
+        }
+
+        ((VHItem) holder).ll_raw_offers_rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isRatingLayoutVisible) {
+                    ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.VISIBLE);
+                    isRatingLayoutVisible = true;
+                } else {
+                    ((VHItem) holder).ll_raw_offers_rating_bar.setVisibility(View.GONE);
+                    isRatingLayoutVisible = false;
                 }
-            });
+            }
+        });
 
-            ((VHItem) holder).ll_raw_offers_location.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mValues.getOffers().get(position).getOfferLocation() != null) {
-                        Utility.initiateGoogleMapsIntent(mContext, mValues.getOffers().get(position).getOfferLocation());
+        ((VHItem) holder).ll_raw_offers_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mValues.getOffers().get(position).getOfferLocation() != null) {
+                    Utility.initiateGoogleMapsIntent(mContext, mValues.getOffers().get(position).getOfferLocation());
 //                        new OfferReportingTask(new int[]{3, mValues.getOffers().get(position).getOfferId()}).execute();
-                        Home.reportOfferLocation(mValues.getOffers().get(position).getOfferId());
-                    } else {
-                        Toast.makeText(mContext, R.string.LocationIsNotAvailable, Toast.LENGTH_SHORT).show();
-                    }
+                    Home.reportOfferLocation(mValues.getOffers().get(position).getOfferId());
+                } else {
+                    Toast.makeText(mContext, R.string.LocationIsNotAvailable, Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
 
-            ((VHItem) holder).ll_raw_offers_call.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mValues.getPhoneNumber() != null) {
-                        Utility.initiateCallIntent(mContext, mValues.getPhoneNumber());
+        ((VHItem) holder).ll_raw_offers_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mValues.getPhoneNumber() != null) {
+                    Utility.initiateCallIntent(mContext, mValues.getPhoneNumber());
 //                        new OfferReportingTask(new int[]{2, mValues.getOffers().get(position).getOfferId()}).execute();
-                        Home.reportOfferCalled(mValues.getOffers().get(position).getOfferId());
-                    } else {
-                        Toast.makeText(mContext, R.string.LocationIsNotAvailable, Toast.LENGTH_SHORT).show();
-                    }
+                    Home.reportOfferCalled(mValues.getOffers().get(position).getOfferId());
+                } else {
+                    Toast.makeText(mContext, R.string.LocationIsNotAvailable, Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
 
-            ((VHItem) holder).iv_raw_offers_share.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Utility.shareImage(mValues.getOffers().get(position).getOfferTitle() ,mValues.getOffers().get(position).getOfferImage(), mContext);
-                    Home.reportOfferShared(mValues.getOffers().get(position).getOfferId());
-                }
-            });
+        ((VHItem) holder).iv_raw_offers_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.shareImage(mValues.getOffers().get(position).getOfferTitle() ,mValues.getOffers().get(position).getOfferImage(), mContext);
+                Home.reportOfferShared(mValues.getOffers().get(position).getOfferId());
+            }
+        });
 
-            feedInFocusID = mValues.getOffers().get(position).getOfferId();
-            offerViewedHandler.removeCallbacks(offerViewedTaskRunnable);
-            offerViewedHandler.postDelayed(offerViewedTaskRunnable, 1000);
+        feedInFocusID = mValues.getOffers().get(position).getOfferId();
+        offerViewedHandler.removeCallbacks(offerViewedTaskRunnable);
+        offerViewedHandler.postDelayed(offerViewedTaskRunnable, 1000);
 //        } else if (holder instanceof VHHeader) {
 //            //cast holder to VHHeader and set data for header.
 //            ((VHHeader) holder).sdv_add_iamge_header.setImageURI(Uri.parse(mValues.getCompanyHeaderPhoto()));
@@ -649,7 +653,7 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             sdvImage = view.findViewById(R.id.sdvImage);
             img_sponser = view.findViewById(R.id.img_sponser);
             sdv_cateogory = view.findViewById(R.id.sdv_cateogory);
-           // sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
+            // sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
             rb_dislike = view.findViewById(R.id.rb_dislike);
             rb_like = view.findViewById(R.id.rb_like);
 

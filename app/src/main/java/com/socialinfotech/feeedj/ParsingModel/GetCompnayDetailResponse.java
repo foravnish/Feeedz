@@ -44,7 +44,6 @@ public class GetCompnayDetailResponse {
     private boolean IsFollowed;
     private boolean Notifications;
     private String PhoneNumber;
-    private boolean IsMultiple;
     private int NumberOfOffers;
     private int ObjectState;
     /**
@@ -224,13 +223,7 @@ public class GetCompnayDetailResponse {
         this.NumberOfOffers = NumberOfOffers;
     }
 
-    public void setMultiple(Boolean multiple) {
-        IsMultiple = multiple;
-    }
 
-    public Boolean getMultiple() {
-        return IsMultiple;
-    }
     public int getObjectState() {
         return ObjectState;
     }
@@ -564,6 +557,14 @@ public class GetCompnayDetailResponse {
             public void setCompanies(List<?> Companies) {
                 this.Companies = Companies;
             }
+        }
+
+        public void setMultiple(Boolean multiple) {
+            IsMultiple = multiple;
+        }
+
+        public Boolean getMultiple() {
+            return IsMultiple;
         }
 
         public class OffersImagesBeansDetails {

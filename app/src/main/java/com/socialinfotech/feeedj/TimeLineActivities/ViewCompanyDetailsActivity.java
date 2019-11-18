@@ -32,6 +32,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
 import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
+import com.socialinfotech.feeedj.ApplicationActivities.MainActivity;
 import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ApplicationActivities.SplashActivity;
 import com.socialinfotech.feeedj.ParsingModel.FeeedjAPIClass;
@@ -374,7 +375,13 @@ public class ViewCompanyDetailsActivity extends AppCompatActivity {
 
         git = restAdapter.create(FeeedjAPIClass.class);
 
-        btnBack.setOnClickListener(v -> onBackPressed());
+//        btnBack.setOnClickListener(v -> onBackPressed());
+
+
+        btnBack.setOnClickListener(v -> {
+                onBackButtonPressToHome();
+
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewCompanyDetailsActivity.this));
 
         Call<GetCompnayDetailResponse> callGetCompanyDetailsResponse = git.getCompanyDetails(companyID);
@@ -511,6 +518,14 @@ public class ViewCompanyDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void onBackButtonPressToHome() {
+        if (getIntent().hasExtra(Constant.FROM_PUSH_NOTIFICATION)){
+            startActivity(new Intent(ViewCompanyDetailsActivity.this, MainActivity.class));
+        }else{
+            finish();
+        }
     }
 
     private void WarningDialog() {
@@ -799,5 +814,12 @@ public class ViewCompanyDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        onBackButtonPressToHome();
     }
 }

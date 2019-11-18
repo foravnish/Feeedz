@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
 import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
@@ -28,16 +30,20 @@ public class PagerCategory extends PagerAdapter {
     Context context;
     String img;
     String htmlImage;
+    Boolean flag;
+    String cord;
     GetSearchResponse.CompanyBean companyBean;
     LayoutInflater mLayoutInflater;
 
-    public PagerCategory(List<GetSearchResponse> views, Context context, List<GetSearchResponse.OffersImagesBeansCat> imagesBeans, String img,String htmlImage, GetSearchResponse.CompanyBean companyBean) {
+    public PagerCategory(List<GetSearchResponse> views, Context context, List<GetSearchResponse.OffersImagesBeansCat> imagesBeans, String img,String htmlImage, GetSearchResponse.CompanyBean companyBean,Boolean flag,String cord) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
         this.img=img;
         this.htmlImage=htmlImage;
         this.companyBean=companyBean;
+        this.flag=flag;
+        this.cord=cord;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -62,41 +68,45 @@ public class PagerCategory extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.image_pager_item, container, false);
 
-        final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
+        final ImageView imageView = (ImageView) itemView.findViewById(R.id.sdv_add_iamge);
 
 
-        if (views.get(position ).getMultiple()) {
-            imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
+        if (flag) {
+//            imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
+            Utility.setImageViaGlide(imageView, "" + imagesBeans.get(position).getImage(), R.drawable.placeholder);
         }else{
-            imageView.setImageURI(Uri.parse(img));
+//            imageView.setImageURI(Uri.parse(img));
+            Utility.setImageViaGlide(imageView, "" + img, R.drawable.placeholder);
         }
 
-        if (imagesBeans.get(position).getCoord() != null) {
-            String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
-            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=698) {
-                imageView.setAspectRatio(1);
-            }
-            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) <=698) {
-                imageView.setAspectRatio((float)1.3);
-            }
-            else if (Integer.parseInt(sImageDimensions[1]) ==699) {
-                imageView.setAspectRatio(1);
-            }
-            else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
-                imageView.setAspectRatio((float)1.8);
-            }else {
-                imageView.setAspectRatio(1);
-            }
-        } else{
-            imageView.setAspectRatio(1);
-        }
+
+
+//        if (cord != null) {
+//            String[] sImageDimensions = cord.split("x");
+//            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=698) {
+//                imageView.setAspectRatio(1);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) <=698) {
+//                imageView.setAspectRatio((float)1.3);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[1]) ==699) {
+//                imageView.setAspectRatio(1);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
+//                imageView.setAspectRatio((float)1.8);
+//            }else {
+//                imageView.setAspectRatio(1);
+//            }
+//        } else if(imagesBeans.get(position).getCoord() == null){
+//            imageView.setAspectRatio(1);
+//        }
 
 
         imageView.setOnClickListener(v -> {
             Log.e("co-ords", "" + imagesBeans.get(position).getImage());
             Log.e("co-ords", "" + imagesBeans.get(position).getCoord());
 
-            if (views.get(position ).getMultiple()) {
+            if (flag) {
 
                 String str = views.get(position).getAttachmentHTML();
 //                if (str == null) {

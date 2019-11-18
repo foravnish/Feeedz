@@ -112,6 +112,7 @@
                 android:layout_weight="0.922"
                 android:textColor="#434343"
                 android:textSize="@dimen/txt_16sp"
+                android:gravity="right"
                 app:customFont="@string/Boldfont" />
 
             <LinearLayout

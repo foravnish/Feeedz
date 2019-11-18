@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.amplitude.api.Amplitude;
 import com.socialinfotech.feeedj.AppUtils.Constant;
 import com.socialinfotech.feeedj.R;
+import com.socialinfotech.feeedj.TimeLineActivities.ViewCompanyDetailsActivity;
 
 import java.util.Locale;
 
@@ -21,7 +22,8 @@ public class LauncherActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    Intent intent = null;
+    int comId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +51,25 @@ public class LauncherActivity extends AppCompatActivity {
                 startActivity(new Intent(LauncherActivity.this, SplashActivity.class));
                 finish();
             }else{
-                startActivity(new Intent(LauncherActivity.this, MainActivity.class));
-                finish();
+                if (getIntent().hasExtra(Constant.SEND_TO_DETAIL_SCREEN)){
+                    Bundle bundle = getIntent().getExtras();
+                    comId=bundle.getInt(Constant.COMPANY_ID);
+                    intent = new Intent(LauncherActivity.this, ViewCompanyDetailsActivity.class);
+                    intent.putExtra(Constant.ToolbarTitle, "");
+                    intent.putExtra(Constant.COMPANY_ID, comId);
+                    intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, "");
+                    intent.putExtra(Constant.COMPANY_PROFILE_NAME, "");
+                    intent.putExtra(Constant.COMPANY_PROFILE_TAG, "");
+                    intent.putExtra(Constant.COMPANY_PROFILE_VERIFIED, "");
+                    intent.putExtra(Constant.COMPANY_PROFILE_LOCATION, "");
+                    intent.putExtra(Constant.COMPANY_PROFILE_PHONE, "");
+                    intent.putExtra(Constant.FROM_PUSH_NOTIFICATION, true);
+                    startActivity(intent);
+
+                }else {
+                    startActivity(new Intent(LauncherActivity.this, MainActivity.class));
+                    finish();
+                }
             }
         },2000);
     }

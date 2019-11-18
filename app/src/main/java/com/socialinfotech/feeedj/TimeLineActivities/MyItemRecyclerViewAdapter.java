@@ -225,7 +225,12 @@ class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 headerHolder.sdvImage.setImageURI(Uri.parse(mValues[position - 1].getCompany().getCompanyProfilePhoto()));
 //                headerHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position-1].getOfferImage()));
 
-                pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage(),mValues[position-1].getAttachmentHTML(),mValues[position-1].getCompany());
+                if (mValues[position-1].getMultiple()) {
+                    pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage(),mValues[position-1].getAttachmentHTML(),mValues[position-1].getCompany(),true,mValues[position-1].getOfferImageCoord());
+                }else{
+                    pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage(),mValues[position-1].getAttachmentHTML(),mValues[position-1].getCompany(),false,mValues[position-1].getOfferImageCoord());
+                }
+
                 headerHolder.view_pager.setAdapter(pagerAdapter);
                 //headerHolder.view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 if (mValues[position-1].getMultiple()) {

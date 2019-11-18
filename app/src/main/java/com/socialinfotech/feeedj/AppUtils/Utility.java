@@ -16,14 +16,19 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -144,6 +149,12 @@ public class Utility {
         context.startActivity(intent);
     }
 
+    public static void setImageViaGlide(ImageView imgVw, String imageUrl, int placeholderId) {
+        if (!TextUtils.isEmpty(imageUrl) && imgVw != null) {
+            RequestOptions requestOptions = new RequestOptions().placeholder(placeholderId).error(placeholderId).fallback(placeholderId).diskCacheStrategy(DiskCacheStrategy.ALL);
+            Glide.with(imgVw.getContext()).load(imageUrl).apply(requestOptions).into(imgVw);
+        }
+    }
     public static void initiateGoogleMapsIntent(Context context, String location) {
         if (isGoogleMapsInstalled(context)) {
             Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + location);

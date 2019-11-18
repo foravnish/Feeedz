@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
 import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
@@ -28,14 +30,32 @@ public class PagerDetail extends PagerAdapter {
     LayoutInflater mLayoutInflater;
     String img;
     Boolean flag;
+    String compName;
+    String CompanyName_Ar;
+    String profile;
     String htmlImage;
-    public PagerDetail(List<GetCompnayDetailResponse> views, Context context, List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans,String img,Boolean flag,String htmlImage) {
+    String phoneNo;
+    String timer;
+    String timerType;
+    String offerLocation;
+    int comId;
+    int comTagId;
+    public PagerDetail(List<GetCompnayDetailResponse> views, Context context, List<GetCompnayDetailResponse.OffersBean.OffersImagesBeansDetails> imagesBeans,String img,Boolean flag,String htmlImage,String compName,String CompanyName_Ar,String profile, String offerLocation,String phoneNo, String timer, String timerType,int comId,int comTagId) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
         this.img=img;
         this.flag=flag;
+        this.compName=compName;
+        this.profile=profile;
         this.htmlImage=htmlImage;
+        this.CompanyName_Ar=CompanyName_Ar;
+        this.offerLocation=offerLocation;
+        this.phoneNo=phoneNo;
+        this.timer=timer;
+        this.timerType=timerType;
+        this.comId=comId;
+        this.comTagId=comTagId;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -60,33 +80,36 @@ public class PagerDetail extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.image_pager_item, container, false);
 
-        final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
+        final ImageView imageView = (ImageView) itemView.findViewById(R.id.sdv_add_iamge);
 
         if (flag) {
-            imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
+            Utility.setImageViaGlide(imageView, "" + imagesBeans.get(position).getImage(), R.drawable.placeholder);
         }else{
-            imageView.setImageURI(Uri.parse(img));
+            Utility.setImageViaGlide(imageView, "" + img, R.drawable.placeholder);
         }
 
-        if (imagesBeans.get(position ).getCoord() != null) {
-            String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
-            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=700) {
-                imageView.setAspectRatio(1);
-            }
-            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) < 700) {
-                imageView.setAspectRatio((float)1.3);
-            }
-            else if (Integer.parseInt(sImageDimensions[0]) == Integer.parseInt(sImageDimensions[1])) {
-                imageView.setAspectRatio(1);
-            }
-            else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
-                imageView.setAspectRatio((float)1.8);
-            } else {
-                imageView.setAspectRatio(1);
-            }
-        } else{
-            imageView.setAspectRatio(1);
-        }
+
+
+
+//        if (imagesBeans.get(position ).getCoord() != null) {
+//            String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
+//            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=700) {
+//                imageView.setAspectRatio(1);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) < 700) {
+//                imageView.setAspectRatio((float)1.3);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[0]) == Integer.parseInt(sImageDimensions[1])) {
+//                imageView.setAspectRatio(1);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
+//                imageView.setAspectRatio((float)1.5);
+//            } else {
+//                imageView.setAspectRatio(1);
+//            }
+//        } else{
+//            imageView.setAspectRatio(1);
+//        }
 
 
 
@@ -134,19 +157,19 @@ public class PagerDetail extends PagerAdapter {
                     } else {
                         Intent intent = new Intent(context, PDFViewActivity.class);
                         intent.putExtra("OFFER_ID", "");
-                        intent.putExtra("OFFER_IMAGE", imagesBeans.get(position).getImage());
+                        intent.putExtra("OFFER_IMAGE", img);
                         intent.putExtra("BROCHURE_PDF_URL", htmlImage);
                         intent.putExtra("BROCHURE_PDF_TITLE", "");
-                        intent.putExtra("COMPANY_NAME", "");
-                        intent.putExtra("COMPANY_USER_NAME", "");
-                        intent.putExtra("COMPANY_VERIFIED", "");
-                        intent.putExtra("COMPANY_LOCATION", "");
-                        intent.putExtra("COMPANY_PHONE_NUMBER", views.get(position ).getPhoneNumber());
-                        intent.putExtra("OFFER_END_TYPE", "");
-                        intent.putExtra(Constant.COMPANY_ID, views.get(position ).getCompanyId());
-                        intent.putExtra("COMPANY_TAG_ID", "");
-                        intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, "");
-                        intent.putExtra("OFFER_TIME_END", "");
+                        intent.putExtra("COMPANY_NAME", ""+CompanyName_Ar);
+                        intent.putExtra("COMPANY_USER_NAME", ""+compName);
+                        intent.putExtra("COMPANY_VERIFIED", true);
+                        intent.putExtra("COMPANY_LOCATION", ""+offerLocation);
+                        intent.putExtra("COMPANY_PHONE_NUMBER", phoneNo);
+                        intent.putExtra("OFFER_END_TYPE", ""+timerType);
+                        intent.putExtra(Constant.COMPANY_ID, comId);
+                        intent.putExtra("COMPANY_TAG_ID", comTagId);
+                        intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, ""+profile);
+                        intent.putExtra("OFFER_TIME_END", ""+timer);
                         context.startActivity(intent);
                     }
                 }

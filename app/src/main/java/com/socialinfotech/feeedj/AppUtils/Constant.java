@@ -37,5 +37,9 @@ public class Constant {
     public static String Launcher="Launcger";
     public static String MAIN_Launcher="MainLaunch";
     public static final String SINGLEOFFERID = "SIngleOfferID";
+    public static final String FROM_PUSH_NOTIFICATION = "FROM_PUSH_NOTIFICATION";
+
+    public static final String SEND_TO_HOME_SCREEN = "SEND_TO_HOME_SCREEN";
+    public static final String SEND_TO_DETAIL_SCREEN = "SEND_TO_DETAIL_SCREEN";
 
 }

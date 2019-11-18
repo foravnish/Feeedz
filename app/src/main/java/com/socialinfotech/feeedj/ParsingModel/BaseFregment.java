@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 
 import com.socialinfotech.feeedj.AppUtils.Constant;
-import com.socialinfotech.feeedj.AppUtils.Lg;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

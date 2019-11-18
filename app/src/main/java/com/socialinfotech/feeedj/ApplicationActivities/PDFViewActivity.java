@@ -219,7 +219,7 @@ public class PDFViewActivity extends AppCompatActivity implements View.OnClickLi
             pdfWebView.loadUrl(pdfURL);
             //taskDownloadPDF = (DownloadPDFTask) new DownloadPDFTask().execute(pdfURL);
 
-            sdvCompanyProfilePhoto.setImageURI(bundle.getString("COMPANY_PROFILE_PHOTO"));
+            sdvCompanyProfilePhoto.setImageURI(bundle.getString("company_profile_photo"));
             sdvCompanyProfilePhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

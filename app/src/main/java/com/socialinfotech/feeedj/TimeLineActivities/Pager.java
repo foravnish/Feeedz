@@ -13,10 +13,12 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.ImageViewActivity;
 import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
@@ -31,16 +33,20 @@ public class Pager extends PagerAdapter {
     Activity context;
     String img;
     String htmlImage;
+    Boolean flag;
+    String imgCoord;
     GetAllOffersResponse.CompanyBean companyBean;
     LayoutInflater mLayoutInflater;
 
-    public Pager(List<GetAllOffersResponse> views, Activity context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans, String img, String htmlImage, GetAllOffersResponse.CompanyBean companyBean) {
+    public Pager(List<GetAllOffersResponse> views, Activity context, List<GetAllOffersResponse.OffersImagesBeans> imagesBeans, String img, String htmlImage, GetAllOffersResponse.CompanyBean companyBean,Boolean flag,String imgCoord) {
         this.views = views;
         this.imagesBeans = imagesBeans;
         this.context = context;
         this.img=img;
         this.htmlImage=htmlImage;
         this.companyBean=companyBean;
+        this.flag=flag;
+        this.imgCoord=imgCoord;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -65,7 +71,7 @@ public class Pager extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.image_pager_item, container, false);
 
-        final SimpleDraweeView imageView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_add_iamge);
+        final ImageView imageView = (ImageView) itemView.findViewById(R.id.sdv_add_iamge);
 
 
 //        Display display = context.getWindowManager().getDefaultDisplay();
@@ -74,39 +80,43 @@ public class Pager extends PagerAdapter {
 //        int screenWidth = size.x;
 //        int screenHeight = size.y;
 
-        if (views.get(position ).getMultiple()) {
-            imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
+        if (flag) {
+            Utility.setImageViaGlide(imageView, "" + imagesBeans.get(position).getImage(), R.drawable.placeholder);
+//            imageView.setImageURI(Uri.parse(imagesBeans.get(position).getImage()));
         }else{
-            imageView.setImageURI(Uri.parse(img));
+            Utility.setImageViaGlide(imageView, "" + img, R.drawable.placeholder);
+//            imageView.setImageURI(Uri.parse(img));
         }
 
-        if (imagesBeans.get(position).getCoord() != null) {
-            String[] sImageDimensions = imagesBeans.get(position).getCoord().split("x");
-            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=698) {
-                imageView.setAspectRatio(1);
-            }
-            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) <=698) {
-                imageView.setAspectRatio((float)1.3);
-            }
-            else if (Integer.parseInt(sImageDimensions[1]) ==699) {
-                imageView.setAspectRatio(1);
-            }
-           else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
-               imageView.setAspectRatio((float)1.8);
-            }else {
-                imageView.setAspectRatio(1);
-            }
-        } else{
-            imageView.setAspectRatio(1);
-        }
+
+//        Utility.setImageViaGlide(imageView, "" + imagesBeans.get(position).getImage(), R.drawable.placeholder);
+
+//        if (imgCoord != null) {
+//            String[] sImageDimensions = imgCoord.split("x");
+//            if (Integer.parseInt(sImageDimensions[1]) >600 && Integer.parseInt(sImageDimensions[1]) <=698) {
+//                imageView.setAspectRatio(1);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[1]) > 500 && Integer.parseInt(sImageDimensions[1]) <=698) {
+//                imageView.setAspectRatio((float)1.3);
+//            }
+//            else if (Integer.parseInt(sImageDimensions[1]) ==699) {
+//                imageView.setAspectRatio(1);
+//            }
+//           else if (Integer.parseInt(sImageDimensions[0]) > Integer.parseInt(sImageDimensions[1])) {
+//               imageView.setAspectRatio((float)1.5);
+//            }else {
+//                imageView.setAspectRatio(1);
+//            }
+//        } else{
+//            imageView.setAspectRatio(1);
+//        }
 
 
         imageView.setOnClickListener(v -> {
             Log.e("co-ords", "" + imagesBeans.get(position).getImage());
             Log.e("co-ords", "" + imagesBeans.get(position).getCoord());
 
-            if (views.get(position ).getMultiple()) {
-
+            if (flag) {
                 String str = htmlImage;
 //                if (str == null) {
                 Intent intent = new Intent(context, ImageViewActivity.class);

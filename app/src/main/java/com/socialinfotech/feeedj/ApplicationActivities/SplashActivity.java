@@ -69,6 +69,9 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
+
+       // Log.d("TokenSavedhere",""+sPref.getString(Constant.FIREBASE_TOKEN, ""));
 /*try{
         PackageInfo info = getPackageManager().getPackageInfo(
                 "com.socialinfotech.feeedj",

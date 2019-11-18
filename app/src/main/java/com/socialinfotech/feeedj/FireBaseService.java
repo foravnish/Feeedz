@@ -17,7 +17,9 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.ApplicationActivities.LauncherActivity;
 import com.socialinfotech.feeedj.ApplicationActivities.MainActivity;
+import com.socialinfotech.feeedj.ApplicationActivities.SplashActivity;
 import com.socialinfotech.feeedj.TimeLineActivities.ViewCompanyDetailsActivity;
 
 import org.json.JSONException;
@@ -33,7 +35,7 @@ public class FireBaseService extends FirebaseMessagingService {
     Context ctx;
     boolean searchNotification;
 
-    String searchTerm;
+    String searchTerm="";
 
     String channelId = "feeedzid_01";
     CharSequence channelName = "Feeedz Channel";
@@ -61,14 +63,18 @@ public class FireBaseService extends FirebaseMessagingService {
 
         ctx = this;
         String CompanyId="";
+        String title="";
+        String body="";
 
         if (remoteMessage.getData() != null) {
             try {
                 Map<String, String> params = remoteMessage.getData();
                 JSONObject object = new JSONObject(params);
-                Log.d("JSONOBJECT", object.toString());
+                Log.d("JSONOBJECT_DATA", object.toString());
                 CompanyId = object.get("Company").toString();
-                notify("",CompanyId);
+                title = object.get("title").toString();
+                body = object.get("body").toString();
+                notify(title,body,CompanyId);
                 //rest of the code
             }
             catch (JSONException e) {
@@ -103,7 +109,7 @@ public class FireBaseService extends FirebaseMessagingService {
             searchNotification = false;
             searchTerm = "";
         }
-        notify(message,CompanyId);
+        notify("",message,CompanyId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -113,44 +119,49 @@ public class FireBaseService extends FirebaseMessagingService {
 //        NOTIFICATION_ID = nhMessage.hashCode();
     }
 
-    private void notify(String message,String CompanyId) {
+    private void notify(String title,String body,String CompanyId) {
         Intent intent = null;
+        int comId= Integer.parseInt(CompanyId);
         Uri soundUri = Settings.System.DEFAULT_NOTIFICATION_URI;
         if (CompanyId!=""){
 
-            intent = new Intent(ctx, ViewCompanyDetailsActivity.class);
-            intent.putExtra(Constant.ToolbarTitle, "");
-            intent.putExtra(Constant.COMPANY_ID, CompanyId);
-            intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, "");
-            intent.putExtra(Constant.COMPANY_PROFILE_NAME, "");
-            intent.putExtra(Constant.COMPANY_PROFILE_TAG, "");
-            intent.putExtra(Constant.COMPANY_PROFILE_VERIFIED, "");
-            intent.putExtra(Constant.COMPANY_PROFILE_LOCATION, "");
-            intent.putExtra(Constant.COMPANY_PROFILE_PHONE, "");
+            intent = new Intent(ctx, LauncherActivity.class);
+            intent.putExtra(Constant.SEND_TO_DETAIL_SCREEN, true);
+            intent.putExtra(Constant.COMPANY_ID, comId);
+//            intent = new Intent(ctx, ViewCompanyDetailsActivity.class);
+//            intent.putExtra(Constant.ToolbarTitle, "");
+//            intent.putExtra(Constant.COMPANY_ID, comId);
+//            intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, "");
+//            intent.putExtra(Constant.COMPANY_PROFILE_NAME, "");
+//            intent.putExtra(Constant.COMPANY_PROFILE_TAG, "");
+//            intent.putExtra(Constant.COMPANY_PROFILE_VERIFIED, "");
+//            intent.putExtra(Constant.COMPANY_PROFILE_LOCATION, "");
+//            intent.putExtra(Constant.COMPANY_PROFILE_PHONE, "");
+//            intent.putExtra(Constant.FROM_PUSH_NOTIFICATION, true);
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            // TODO: Add more extras
-            ctx.startActivity(intent);
 
         }else {
-            intent = new Intent(ctx, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = new Intent(ctx, LauncherActivity.class);
+            intent.putExtra(Constant.SEND_TO_HOME_SCREEN, true);
+
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
         if (searchNotification) {
-            intent.putExtra("Search", searchTerm);
+           // intent.putExtra("Search", searchTerm);
         }
         PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0,
                 intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(ctx, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
 //                .setLargeIcon(bitmap)
-                .setContentTitle(ctx.getString(R.string.app_name))
+//                .setContentTitle(ctx.getString(R.string.app_name))
+                .setContentTitle(title)
                 .setContentIntent(contentIntent)
-                .setContentText(message)
+                .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(soundUri)
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(message));
+                        .bigText(body));
 
         NotificationManager mNotificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
