@@ -245,7 +245,7 @@ public class ViewCompanyDetailsActivity extends AppCompatActivity {
                 intent.putExtra("OFFER_END_TYPE", mValues.getOffers().get(0).getOfferEndType());
                 intent.putExtra("COMPANY_ID", mValues.getOffers().get(0).getCompanyId());
                 intent.putExtra("COMPANY_TAG_ID", mValues.getOffers().get(0).getCompanyTagId());
-                intent.putExtra("COMPANY_PROFILE_PHOTO", mValues.getCompanyProfilePhoto());
+                intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, mValues.getCompanyProfilePhoto());
                 intent.putExtra("OFFER_TIME_END", mValues.getOffers().get(0).getOfferTimeEnd());
                 if (!isTimelineHeaderViewed(String.valueOf(mValues.getOffers().get(0).getOfferId()))) {
                     putTimelineHeaderViewed(String.valueOf(mValues.getOffers().get(0).getOfferId()));

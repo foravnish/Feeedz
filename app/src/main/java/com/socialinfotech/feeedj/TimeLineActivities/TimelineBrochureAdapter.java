@@ -93,7 +93,7 @@ public class TimelineBrochureAdapter extends RecyclerView.Adapter<TimelineBrochu
             intent.putExtra("OFFER_END_TYPE", mValues.get(position).getOfferEndType());
             intent.putExtra("COMPANY_ID", mValues.get(position).getCompanyId());
             intent.putExtra("COMPANY_TAG_ID", mValues.get(position).getCompanyTagId());
-            intent.putExtra("COMPANY_PROFILE_PHOTO", mValues.get(position).getCompany().getCompanyProfilePhoto());
+            intent.putExtra(Constant.COMPANY_PROFILE_PHOTO, mValues.get(position).getCompany().getCompanyProfilePhoto());
             intent.putExtra("OFFER_TIME_END", mValues.get(position).getOfferTimeEnd());
             if (!isTimelineHeaderViewed(String.valueOf(mValues.get(position).getOfferId()))) {
             putTimelineHeaderViewed(String.valueOf(mValues.get(position).getOfferId()));

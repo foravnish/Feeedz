@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        android:layout_below="@+id/toolbar"
         app:layout_progress ="@layout/view_progrss"
         tools:context=".ExploreActivities.CategoryFollowActivity"
         tools:listitem="@layout/raw_cateogry_follow" />

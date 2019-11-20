@@ -64,7 +64,9 @@ public class LauncherActivity extends AppCompatActivity {
                     intent.putExtra(Constant.COMPANY_PROFILE_LOCATION, "");
                     intent.putExtra(Constant.COMPANY_PROFILE_PHONE, "");
                     intent.putExtra(Constant.FROM_PUSH_NOTIFICATION, true);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+
 
                 }else {
                     startActivity(new Intent(LauncherActivity.this, MainActivity.class));

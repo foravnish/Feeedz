@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
@@ -177,7 +178,8 @@ public class FireBaseService extends FirebaseMessagingService {
             notificationChannel.setSound(soundUri,audioAttributes);
             mNotificationManager.createNotificationChannel(notificationChannel);
         }
-        mNotificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+        Long notificationId = SystemClock.currentThreadTimeMillis();
+        mNotificationManager.notify(notificationId.intValue(), notificationBuilder.build());
     }
 
 //    private void sendNotification(String messageBody) {

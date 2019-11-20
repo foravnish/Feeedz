@@ -1,5 +1,6 @@
 package com.socialinfotech.feeedj.FollowingActivities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import com.luseen.autolinklibrary.AutoLinkMode;
 import com.luseen.autolinklibrary.AutoLinkOnClickListener;
 import com.luseen.autolinklibrary.AutoLinkTextView;
 import com.socialinfotech.feeedj.AppUtils.Constant;
+import com.socialinfotech.feeedj.AppUtils.HeightWrappingViewPager;
 import com.socialinfotech.feeedj.AppUtils.TextViewPlus;
 import com.socialinfotech.feeedj.AppUtils.Utility;
 import com.socialinfotech.feeedj.ApplicationActivities.Home;
@@ -33,6 +35,7 @@ import com.socialinfotech.feeedj.ApplicationActivities.PDFViewActivity;
 import com.socialinfotech.feeedj.ExploreActivities.CategoryTabActivity;
 import com.socialinfotech.feeedj.ParsingModel.GetAllOffersResponse;
 import com.socialinfotech.feeedj.R;
+import com.socialinfotech.feeedj.TimeLineActivities.Pager;
 import com.socialinfotech.feeedj.TimeLineActivities.ViewCompanyDetailsActivity;
 
 import java.text.ParseException;
@@ -53,14 +56,14 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final GetAllOffersResponse[] mValues;
     private List<HeaderViewHolder> lstHolders;
     private Handler mHandler = new Handler();
-    Context mContext;
+    Activity mContext;
     boolean isRatingLayoutVisible;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_FOOTER = 1;
     HashMap<Integer, Integer> hashMapRating;
     SharedPreferences sPref;
     SharedPreferences.Editor editor;
-    //Pager pagerAdapter;
+    Pager pagerAdapter;
 
     private Runnable updateRemainingTimeRunnable = new Runnable() {
         @Override
@@ -84,7 +87,7 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     };
 
-    public FollowingViewAdapter(GetAllOffersResponse[] getAllOffersResponses, Context cnt) {
+    public FollowingViewAdapter(GetAllOffersResponse[] getAllOffersResponses, Activity cnt) {
         mContext = cnt;
         mValues = getAllOffersResponses;
         hashMapRating = new HashMap<>();
@@ -106,7 +109,7 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == TYPE_HEADER) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.raw_following_item_follow, parent, false);
+                    .inflate(R.layout.raw_following_item, parent, false);
             return new HeaderViewHolder(view);
         }
         else if(viewType == TYPE_FOOTER) {
@@ -148,8 +151,22 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             headerHolder.sdvImage.setImageURI(Uri.parse(mValues[position].getCompany().getCompanyProfilePhoto()));
 
+            if (mValues[position].getMultiple()) {
+                pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany(),true,mValues[position].getOfferImageCoord());
+            }else{
+                pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany(),false,mValues[position].getOfferImageCoord());
+            }
+            headerHolder.view_pager.setAdapter(pagerAdapter);
 
-            headerHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position].getOfferImage()));
+            if (mValues[position].getMultiple()) {
+                headerHolder.indicator.setVisibility(View.VISIBLE);
+                headerHolder.indicator.setViewPager(headerHolder.view_pager);
+            }
+            else{
+                headerHolder.indicator.setVisibility(View.GONE);
+            }
+
+//            headerHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position].getOfferImage()));
 
 //            pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position].getOfferImages());
           //  headerHolder.view_pager.setAdapter(pagerAdapter);
@@ -160,9 +177,9 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
             if (mValues[position].getOfferImageCoord() != null) {
                 String[] sImageDimensions = mValues[position].getOfferImageCoord().split("x");
                 if (Integer.parseInt(sImageDimensions[0]) < Integer.parseInt(sImageDimensions[1])) {
-                    headerHolder.sdv_add_iamge.setAspectRatio(1);
+                  //  headerHolder.sdv_add_iamge.setAspectRatio(1);
                 } else {
-                    headerHolder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
+                  //  headerHolder.sdv_add_iamge.setAspectRatio((float) Integer.parseInt(sImageDimensions[0]) / (float) Integer.parseInt(sImageDimensions[1]));
                 }
             }
             //headerHolder.sdv_add_iamge.setAspectRatio(1);
@@ -468,8 +485,6 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView txt_hrs;
         TextView txt_scnd;
         TextView txt_minut;
-
-
         LinearLayout ll_raw_offers_rating_bar;
         RatingBar rBarRawOffersRating;
         LinearLayout ll_raw_offers_rate;
@@ -488,8 +503,8 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
         RelativeLayout btn_navigate;
         public GetAllOffersResponse mItem;
         RelativeLayout main_rl;
-//        ViewPager view_pager;
-//        CircleIndicator indicator;
+        ViewPager view_pager;
+        CircleIndicator indicator;
 
         public void updateTimeRemaining(long currentTime) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -533,7 +548,7 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
             txt_minut = (TextViewPlus) view.findViewById(R.id.txt_minut);
             sdvImage = view.findViewById(R.id.sdvImage);
             sdv_cateogory = view.findViewById(R.id.sdv_cateogory);
-            sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
+          //  sdv_add_iamge = view.findViewById(R.id.sdv_add_iamge);
             ll_raw_offers_rating_bar = view.findViewById(R.id.ll_timeline_rating);
             rBarRawOffersRating = view.findViewById(R.id.r_bar_timline_rating);
             ll_raw_offers_rate = view.findViewById(R.id.ll_raw_offers_rate);
@@ -547,8 +562,8 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
             llRawOffersEndType = view.findViewById(R.id.ll_raw_feed_offer_end_type);
             tvRawOffersEndType = view.findViewById(R.id.tv_raw_feed_offer_end_type);
 
-//            view_pager = view.findViewById(R.id.view_pager);
-//            indicator = view.findViewById(R.id.indicator);
+            view_pager = view.findViewById(R.id.view_pager);
+            indicator = view.findViewById(R.id.indicator);
 
         }
 

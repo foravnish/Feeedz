@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/margin_5dp"
                 android:layout_marginTop="@dimen/margin_8dp"
-                android:layout_toLeftOf="@+id/txt_compnay_name"
                 android:src="@mipmap/ic_timeline_feed_offer_verified" />
 
             <!--<com.socialinfotech.feeedj.AppUtils.TextViewPlus-->
