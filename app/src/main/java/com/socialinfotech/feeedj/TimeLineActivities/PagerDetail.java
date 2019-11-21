@@ -63,7 +63,10 @@ public class PagerDetail extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imagesBeans.size();
+        if (imagesBeans != null && imagesBeans.size() > 0){
+            return imagesBeans.size();
+        }
+        return 0;
     }
 
     @Override

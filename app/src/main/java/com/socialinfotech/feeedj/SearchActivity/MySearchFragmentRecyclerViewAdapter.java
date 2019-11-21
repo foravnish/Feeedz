@@ -172,15 +172,14 @@ public class MySearchFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Re
 
         searchViewHolder.sdvImage.setImageURI(Uri.parse(mValues[position - 1].getCompany().getCompanyProfilePhoto()));
         //searchViewHolder.sdv_add_iamge.setImageURI(Uri.parse(mValues[position - 1].getOfferImage()));
-
-            if (mValues[position-1].getMultiple()) {
-                pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage(),mValues[position-1].getAttachmentHTML(),mValues[position-1].getCompany(),true,mValues[position-1].getOfferImageCoord());
-            }else{
-                pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext,mValues[position-1].getOfferImages(),mValues[position-1].getOfferImage(),mValues[position-1].getAttachmentHTML(),mValues[position-1].getCompany(),false,mValues[position-1].getOfferImageCoord());
+            if (mValues[position-1].getOfferImage().length()>0) {
+                if (mValues[position - 1].getMultiple()) {
+                    pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext, mValues[position - 1].getOfferImages(), mValues[position - 1].getOfferImage(), mValues[position - 1].getAttachmentHTML(), mValues[position - 1].getCompany(), true, mValues[position - 1].getOfferImageCoord());
+                } else {
+                    pagerAdapter = new PagerCategory(Arrays.asList(mValues), mContext, mValues[position - 1].getOfferImages(), mValues[position - 1].getOfferImage(), mValues[position - 1].getAttachmentHTML(), mValues[position - 1].getCompany(), false, mValues[position - 1].getOfferImageCoord());
+                }
+                searchViewHolder.view_pager.setAdapter(pagerAdapter);
             }
-
-
-            searchViewHolder.view_pager.setAdapter(pagerAdapter);
 
             if (mValues[position-1].getMultiple()) {
                 searchViewHolder.indicator.setVisibility(View.VISIBLE);

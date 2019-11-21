@@ -150,13 +150,14 @@ public class FollowingViewAdapter extends RecyclerView.Adapter<RecyclerView.View
             headerHolder.txt_add_title.setTypeface(typeface_txt_add_title);
 
             headerHolder.sdvImage.setImageURI(Uri.parse(mValues[position].getCompany().getCompanyProfilePhoto()));
-
-            if (mValues[position].getMultiple()) {
-                pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany(),true,mValues[position].getOfferImageCoord());
-            }else{
-                pagerAdapter = new Pager(Arrays.asList(mValues), mContext,mValues[position].getOfferImages(),mValues[position].getOfferImage(),mValues[position].getAttachmentHTML(),mValues[position].getCompany(),false,mValues[position].getOfferImageCoord());
+            if (mValues[position].getOfferImage().length()>0) {
+                if (mValues[position].getMultiple()) {
+                    pagerAdapter = new Pager(Arrays.asList(mValues), mContext, mValues[position].getOfferImages(), mValues[position].getOfferImage(), mValues[position].getAttachmentHTML(), mValues[position].getCompany(), true, mValues[position].getOfferImageCoord());
+                } else {
+                    pagerAdapter = new Pager(Arrays.asList(mValues), mContext, mValues[position].getOfferImages(), mValues[position].getOfferImage(), mValues[position].getAttachmentHTML(), mValues[position].getCompany(), false, mValues[position].getOfferImageCoord());
+                }
+                headerHolder.view_pager.setAdapter(pagerAdapter);
             }
-            headerHolder.view_pager.setAdapter(pagerAdapter);
 
             if (mValues[position].getMultiple()) {
                 headerHolder.indicator.setVisibility(View.VISIBLE);

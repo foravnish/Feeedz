@@ -146,13 +146,14 @@ public class CompnayDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((VHItem) holder).txt_add_title.setTypeface(typeface_txt_add_title);
 
 //            ((VHItem) holder).sdv_add_iamge.setImageURI(Uri.parse(mValues.getOffers().get(position).getOfferImage()));
-        if (mValues.getOffers().get(position).getMultiple()) {
-            pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages(),mValues.getOffers().get(position).getOfferImage(),true,mValues.getOffers().get(position).getAttachmentHTML(),mValues.getCompanyName(),mValues.getCompanyName_Ar(),mValues.getCompanyProfilePhoto(),mValues.getOffers().get(position).getOfferLocation(),mValues.getPhoneNumber(),mValues.getOffers().get(position).getOfferTimeEnd(),mValues.getOffers().get(position).getOfferEndType(),mValues.getOffers().get(position).getCompanyId(),mValues.getOffers().get(position).getCompanyTagId());
-        }else{
-            pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext,mValues.getOffers().get(position).getOfferImages(),mValues.getOffers().get(position).getOfferImage(),false,mValues.getOffers().get(position).getAttachmentHTML(),mValues.getCompanyName(),mValues.getCompanyName_Ar(),mValues.getCompanyProfilePhoto(),mValues.getOffers().get(position).getOfferLocation(),mValues.getPhoneNumber(),mValues.getOffers().get(position).getOfferTimeEnd(),mValues.getOffers().get(position).getOfferEndType(),mValues.getOffers().get(position).getCompanyId(),mValues.getOffers().get(position).getCompanyTagId());
+        if (mValues.getOffers().get(position).getOfferImage().length()>0) {
+            if (mValues.getOffers().get(position).getMultiple()) {
+                pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext, mValues.getOffers().get(position).getOfferImages(), mValues.getOffers().get(position).getOfferImage(), true, mValues.getOffers().get(position).getAttachmentHTML(), mValues.getCompanyName(), mValues.getCompanyName_Ar(), mValues.getCompanyProfilePhoto(), mValues.getOffers().get(position).getOfferLocation(), mValues.getPhoneNumber(), mValues.getOffers().get(position).getOfferTimeEnd(), mValues.getOffers().get(position).getOfferEndType(), mValues.getOffers().get(position).getCompanyId(), mValues.getOffers().get(position).getCompanyTagId());
+            } else {
+                pagerAdapter = new PagerDetail(Arrays.asList(mValues), mContext, mValues.getOffers().get(position).getOfferImages(), mValues.getOffers().get(position).getOfferImage(), false, mValues.getOffers().get(position).getAttachmentHTML(), mValues.getCompanyName(), mValues.getCompanyName_Ar(), mValues.getCompanyProfilePhoto(), mValues.getOffers().get(position).getOfferLocation(), mValues.getPhoneNumber(), mValues.getOffers().get(position).getOfferTimeEnd(), mValues.getOffers().get(position).getOfferEndType(), mValues.getOffers().get(position).getCompanyId(), mValues.getOffers().get(position).getCompanyTagId());
+            }
+            ((VHItem) holder).view_pager.setAdapter(pagerAdapter);
         }
-
-        ((VHItem) holder).view_pager.setAdapter(pagerAdapter);
         ((VHItem) holder).view_pager.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         if (mValues.getOffers().get(position).getOfferImages().size()>1) {
